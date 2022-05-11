@@ -230,8 +230,8 @@ let _0x134a17 = new Date(),
     _0x459e63 = 1.07,
     _0x2e716e = 0,
     _0x5bc515 = "ksjsb",
-    _0x180c0c = "https://raw.githubusercontent.com/zhangzuting/xin/main/ks.json",//json
-    ksjsbjk = "https://ghproxy.com/https://raw.githubusercontent.com/zhangzuting/xin/main/ksjsb.json",//json
+    _0x180c0c = "https://raw.githubusercontent.com/gjzbbs/xin/main/ks.json",//json
+    ksjsbjk = "https://ghproxy.com/https://raw.githubusercontent.com/gjzbbs/xin/main/ksjsb.json",//json
     _0x75eec0 = "https://127.0.0.1/";
 
 class _0x9d8dda {
@@ -1152,7 +1152,7 @@ async function _0x505e51() {
     if (a["status"] == 0) {
       if (_0x459e63 >= a["version"]) {
         _0x2e716e = true;
-        _0x75eec0 = "https://raw.githubusercontent.com/zhangzuting/xin/main/ks.json";
+        _0x75eec0 = "https://raw.githubusercontent.com/gjzbbs/xin/main/ks.json";
         console["log"](a["msg"][a["status"]]);
         console['log'](a["updateMsg"]);
         console["log"]("现在运行的脚本版本是：1.07，最新脚本版本：" + a["latestVersion"]);
