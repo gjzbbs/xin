@@ -1,4 +1,3 @@
-# ===== A. OpenAI / ChatGPT =====
 DOMAIN,chatgpt.com
 DOMAIN,chat.openai.com
 DOMAIN,api.openai.com
@@ -16,8 +15,6 @@ DOMAIN-SUFFIX,featuregates.org
 DOMAIN-SUFFIX,statsigapi.net
 DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,intercom.io
-
-# ===== B. Google Gemini =====
 DOMAIN,gemini.google.com
 DOMAIN,aistudio.google.com
 DOMAIN,ai.google.dev
@@ -32,29 +29,19 @@ DOMAIN,makersuite.google.com
 DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN,notebooklm.google.com
-
-# ===== C. Anthropic / Claude =====
 DOMAIN,claude.ai
 DOMAIN-SUFFIX,Anthropic.com
 DOMAIN,api.anthropic.com
 DOMAIN,console.anthropic.com
-
-# ===== D. Microsoft Copilot / Bing =====
 DOMAIN,copilot.microsoft.com
 DOMAIN,sydney.bing.com
 DOMAIN,edgeservices.bing.com
 DOMAIN-SUFFIX,bing.com
-
-# ===== E. xAI / Grok =====
 DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
 DOMAIN,api.x.ai
-
-# ===== F. Perplexity =====
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,pplx.ai
-
-# ===== G. 其他常用 AI 站 =====
 DOMAIN-SUFFIX,huggingface.co
 DOMAIN-SUFFIX,midjourney.com
 DOMAIN-SUFFIX,cursor.com
@@ -62,8 +49,6 @@ DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,civitai.com
 DOMAIN-SUFFIX,ciciai.com
 DOMAIN-SUFFIX,opera-api.com
-
-# ===== H. 终极兜底（关键词命中即走代理，防新域名漏网）=====
 DOMAIN-KEYWORD,google
 DOMAIN-KEYWORD,claude
 DOMAIN-KEYWORD,deepmind
