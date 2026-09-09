@@ -49,7 +49,7 @@ DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,civitai.com
 DOMAIN-SUFFIX,ciciai.com
 DOMAIN-SUFFIX,opera-api.com
-DOMAIN-KEYWORD,google
+DOMAIN-KEYWORD,gemini
 DOMAIN-KEYWORD,claude
 DOMAIN-KEYWORD,deepmind
 DOMAIN-KEYWORD,copilot
