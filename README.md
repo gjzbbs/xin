@@ -14,6 +14,7 @@
 | `custom-proxy.list` | 自维护「强制走代理」域名清单 | **日常主要改这个** |
 | `custom-direct.list` | 自维护「强制走直连」域名清单 | **日常主要改这个** |
 | `ai.list` | AI 站点清单（走 🤖 人工智能 组） | 想加 AI 站点时动 |
+| `meta.list` | Meta 系站点清单（Facebook / Instagram / WhatsApp / Threads，走 📘 Meta 组） | 想加 Meta 系域名时动 |
 | `ShellClash_Full_Block.ini` | 旧母版，保留备查 | 不动 |
 
 ---
@@ -33,7 +34,8 @@ ShellCrash 的规则来源是 `configs/servers.list` 里 `^5` 开头的行，由
    ```
 
    > 爱快插件版真身路径以 `/etc/mnt/plugins/configs/shellcrash/configs/servers.list` 为准；
-   > `/tmp/iktmp/.../configs/servers.list` 是开机由 ipk 重建的副本，改它无效。
+   > `/tmp/iktmp/plugins/shellcrash/bin/configs` 是指向该持久区的软链（inode 相同），两边改都等效，
+   > 但重启后软链由 ipk 重建，直接改持久区更稳。
 
 4. 回到菜单 `4 选取在线配置规则模版`，选中 `520`，`rule_link` 会写成 20（序号，不是 520）
 5. 返回上级 → `1 在线生成配置文件` → 确认后生成
@@ -112,12 +114,30 @@ MATCH                                    → 🐟 漏网之鱼
 用真实订阅链路 + 本 ini 请求转换后端，实测结果：
 
 ```
-proxies=69  groups=31  rules=13499
+groups=32  rules=13499
 - DOMAIN-SUFFIX,example.com,🎯 全球直连     ← custom-direct.list 生效
 - DOMAIN-SUFFIX,example.org,🚀 节点选择     ← custom-proxy.list 生效
+- DOMAIN-SUFFIX,facebook.com,📘 Meta        ← meta.list 生效
 - GEOIP,CN,🎯 全球直连                       ← GEOIP 兜底生效
 - MATCH,🐟 漏网之鱼                          ← 末尾兜底生效
 ```
 
 关键点：转换请求**必须带 `insert=true`**，否则后端只返回 proxies、不返回 proxy-groups 和 rules。
 ShellCrash 的 `starts/core_config.sh` 里已经硬编码了 `insert=true`，走菜单生成不需要你操心。
+
+---
+
+## 六、改完为什么有时不立刻生效
+
+`sub.jwsc.eu.org` 是**多实例 + 带缓存**的转换后端。同一个 config URL 连发三次，
+出现过前两次返回旧版本（32 组里的第 16 组还是旧名）、第三次才拿到新内容的情况。
+
+所以：
+
+1. 改完 GitHub 后等 1–2 分钟再让路由器生成；
+2. 一次没生效不算改错，**重试一次**（ShellCrash 菜单 `7 更新配置文件`）；
+3. 排查时给 config URL 加个查询串强制绕缓存，例如
+   `...ShellClash_Custom.ini?v=2`（只影响你手动自测，不影响 ini 内容）。
+
+> 用 `?v=` 自测时注意：某些后端实例会把带 query 的 URL 当成另一个缓存键，
+> 所以自测结果和路由器实际结果可能短暂不一致，以路由器生成为准。
