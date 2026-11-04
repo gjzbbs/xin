@@ -1,9 +1,16 @@
 # 自维护「强制走代理」清单
-# 格式（Clash classical 规则，一行一条，改完保存即生效）：
-#   DOMAIN-SUFFIX,example.org
-#   DOMAIN,www.example.org
-#   DOMAIN-KEYWORD,keyword
-# 说明：本文件由 subconverter 服务器下载，路由器无需访问 GitHub。
-#       命中本文件的域名走「🚀 节点选择」策略组。
+#
+# 一行一条，格式：
+#   DOMAIN,www.example.com          精确域名
+#   DOMAIN-SUFFIX,example.com       该域名及其所有子域
+#   DOMAIN-KEYWORD,keyword          域名中含该关键字的全部走代理
+#   IP-CIDR,1.2.3.0/24              网段（会自动加 no-resolve）
+#
+# 命中本清单的域名走「🚀 节点选择」策略组，
+# 优先级高于 Netflix / YouTube / 微软 等所有通用分流，
+# 想让哪个域名强行走代理，加在这里最省事。
+#
+# 改完保存（Commit），路由器执行一次「更新订阅」即生效。
 
+# ---- 示例，按需删改 ----
 DOMAIN-SUFFIX,example.org
