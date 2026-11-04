@@ -5,10 +5,90 @@
 #   DOMAIN,api.openai.com         精确域名
 #   DOMAIN-KEYWORD,openai         含关键字的域名（谨慎用，容易误伤）
 # 命中本清单的域名走「🤖 人工智能」策略组，
-
-
-#
 # 改完保存（Commit），路由器执行一次「更新订阅」即生效。
 
-
 # ---------- OpenAI / ChatGPT ----------
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,chat.com
+DOMAIN-SUFFIX,sora.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-KEYWORD,openai
+
+# ---------- Anthropic / Claude ----------
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claudeusercontent.com
+
+# ---------- Google Gemini / AI Studio / DeepMind ----------
+DOMAIN,gemini.google.com
+DOMAIN,bard.google.com
+DOMAIN,aistudio.google.com
+DOMAIN,makersuite.google.com
+DOMAIN,generativelanguage.googleapis.com
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+
+# ---------- Microsoft Copilot ----------
+DOMAIN-SUFFIX,copilot.microsoft.com
+DOMAIN-SUFFIX,copilot.cloud.microsoft
+DOMAIN-SUFFIX,designer.microsoft.com
+
+# ---------- Perplexity ----------
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai
+
+# ---------- xAI / Grok ----------
+DOMAIN-SUFFIX,x.ai
+DOMAIN-SUFFIX,grok.com
+
+# ---------- Midjourney / Stability / Runway ----------
+DOMAIN-SUFFIX,midjourney.com
+DOMAIN-SUFFIX,stability.ai
+DOMAIN-SUFFIX,runwayml.com
+DOMAIN-SUFFIX,runway.com
+
+# ---------- HuggingFace / 模型托管 ----------
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,hf.co
+DOMAIN-SUFFIX,hf.space
+
+# ---------- 通用 API 托管 ----------
+DOMAIN-SUFFIX,openrouter.ai
+DOMAIN-SUFFIX,together.ai
+DOMAIN-SUFFIX,together.xyz
+DOMAIN-SUFFIX,replicate.com
+DOMAIN-SUFFIX,fireworks.ai
+DOMAIN-SUFFIX,groq.com
+DOMAIN-SUFFIX,mistral.ai
+DOMAIN-SUFFIX,cohere.ai
+DOMAIN-SUFFIX,cohere.com
+DOMAIN-SUFFIX,ai21.com
+
+# ---------- Poe / 聚合站 ----------
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,character.ai
+DOMAIN-SUFFIX,pi.ai
+DOMAIN-SUFFIX,you.com
+DOMAIN-SUFFIX,phind.com
+
+# ---------- 编程助手 ----------
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,codeium.com
+DOMAIN-SUFFIX,windsurf.com
+DOMAIN-SUFFIX,tabnine.com
+DOMAIN-SUFFIX,sourcegraph.com
+
+# ---------- 图像 / 音频 / 视频生成 ----------
+DOMAIN-SUFFIX,elevenlabs.io
+DOMAIN-SUFFIX,suno.com
+DOMAIN-SUFFIX,suno.ai
+DOMAIN-SUFFIX,heygen.com
+DOMAIN-SUFFIX,synthesia.io
+
+# ---------- 国内 AI（如需直连，把下面几行移到 custom-direct.list）----------
+# DOMAIN-SUFFIX,deepseek.com
+# DOMAIN-SUFFIX,moonshot.cn
+# DOMAIN-SUFFIX,bigmodel.cn
