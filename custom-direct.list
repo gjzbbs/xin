@@ -1,0 +1,10 @@
+# 自维护「强制直连」清单
+# 格式（Clash classical 规则，一行一条，改完保存即生效）：
+#   DOMAIN-SUFFIX,example.com
+#   DOMAIN,www.example.com
+#   DOMAIN-KEYWORD,keyword
+#   IP-CIDR,192.168.0.0/16,no-resolve
+# 说明：本文件由 subconverter 服务器下载，路由器无需访问 GitHub。
+#       想加“一定不走代理”的站点，直接在 GitHub 网页编辑本文件。
+
+DOMAIN-SUFFIX,example.com
