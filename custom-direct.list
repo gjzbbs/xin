@@ -1,10 +1,18 @@
-# 自维护「强制直连」清单
-# 格式（Clash classical 规则，一行一条，改完保存即生效）：
-#   DOMAIN-SUFFIX,example.com
-#   DOMAIN,www.example.com
-#   DOMAIN-KEYWORD,keyword
-#   IP-CIDR,192.168.0.0/16,no-resolve
-# 说明：本文件由 subconverter 服务器下载，路由器无需访问 GitHub。
-#       想加“一定不走代理”的站点，直接在 GitHub 网页编辑本文件。
+# 自维护「强制走直连」清单
+#
+# 一行一条，格式：
+#   DOMAIN,www.example.com          精确域名
+#   DOMAIN-SUFFIX,example.com       该域名及其所有子域
+#   DOMAIN-KEYWORD,keyword          域名中含该关键字的全部走直连
+#   IP-CIDR,192.168.1.0/24          网段（会自动加 no-resolve）
+#
+# 命中本清单的域名走「🎯 全球直连」策略组，
+# 排在广告拦截之前，所以写在这里的域名既不会被广告规则拦掉，
+# 也不会被后面的流媒体/微软/苹果规则抢走。
+#
+# 典型用途：公司内网、家里 NAS、只有国内线路才通的服务。
+#
+# 改完保存（Commit），路由器执行一次「更新订阅」即生效。
 
+# ---- 示例，按需删改 ----
 DOMAIN-SUFFIX,example.com
