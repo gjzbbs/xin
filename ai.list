@@ -1,0 +1,101 @@
+# ============================================================
+# AI 站点清单 —— 命中本文件的域名走策略组「🤖 人工智能」
+#
+# 用法：直接在文件末尾按同样格式加行，Commit 后下次生成配置即生效。
+# 每行只写「规则类型,值」，不要写组名（组名由 ini 里那条
+#   ruleset=🤖 人工智能,https://raw.githubusercontent.com/gjzbbs/xin/main/ai.list
+# 统一指定）。
+# 支持的写法：
+#   DOMAIN-SUFFIX,openai.com      含所有子域（推荐）
+#   DOMAIN,api.openai.com         精确域名
+#   DOMAIN-KEYWORD,openai         含关键字的域名（谨慎用，容易误伤）
+# ============================================================
+
+# ---------- OpenAI / ChatGPT ----------
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,chat.com
+DOMAIN-SUFFIX,sora.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,auth0.openai.com
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-KEYWORD,openai
+
+# ---------- Anthropic / Claude ----------
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claudeusercontent.com
+
+# ---------- Google Gemini / DeepMind ----------
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,generativelanguage.googleapis.com
+
+# ---------- Microsoft Copilot ----------
+DOMAIN-SUFFIX,copilot.microsoft.com
+DOMAIN-SUFFIX,copilot.cloud.microsoft
+DOMAIN-SUFFIX,designer.microsoft.com
+DOMAIN-SUFFIX,oai.microsoft.com
+
+# ---------- Perplexity ----------
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai
+
+# ---------- xAI / Grok ----------
+DOMAIN-SUFFIX,x.ai
+DOMAIN-SUFFIX,grok.com
+
+# ---------- Midjourney / Stability / Runway ----------
+DOMAIN-SUFFIX,midjourney.com
+DOMAIN-SUFFIX,stability.ai
+DOMAIN-SUFFIX,runwayml.com
+DOMAIN-SUFFIX,runway.com
+
+# ---------- HuggingFace / 模型托管 ----------
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,hf.co
+DOMAIN-SUFFIX,hf.space
+
+# ---------- 通用 API 托管 ----------
+DOMAIN-SUFFIX,openrouter.ai
+DOMAIN-SUFFIX,together.ai
+DOMAIN-SUFFIX,together.xyz
+DOMAIN-SUFFIX,replicate.com
+DOMAIN-SUFFIX,fireworks.ai
+DOMAIN-SUFFIX,groq.com
+DOMAIN-SUFFIX,mistral.ai
+DOMAIN-SUFFIX,cohere.ai
+DOMAIN-SUFFIX,cohere.com
+DOMAIN-SUFFIX,ai21.com
+
+# ---------- Poe / 聚合站 ----------
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,character.ai
+DOMAIN-SUFFIX,pi.ai
+DOMAIN-SUFFIX,you.com
+DOMAIN-SUFFIX,phind.com
+
+# ---------- 编程助手 ----------
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,codeium.com
+DOMAIN-SUFFIX,windsurf.com
+DOMAIN-SUFFIX,tabnine.com
+DOMAIN-SUFFIX,sourcegraph.com
+
+# ---------- 图像 / 音频生成 ----------
+DOMAIN-SUFFIX,elevenlabs.io
+DOMAIN-SUFFIX,suno.com
+DOMAIN-SUFFIX,suno.ai
+DOMAIN-SUFFIX,heygen.com
+DOMAIN-SUFFIX,synthesia.io
+
+# ---------- 国内常见（如需直连请移到 custom-direct.list）----------
+# DOMAIN-SUFFIX,deepseek.com
+# DOMAIN-SUFFIX,moonshot.cn
+# DOMAIN-SUFFIX,bigmodel.cn
