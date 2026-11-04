@@ -13,7 +13,7 @@
 | `ShellClash_Custom.ini` | 规则母版（ruleset + 策略组 + 开关） | 增删分流段落时才动 |
 | `custom-proxy.list` | 自维护「强制走代理」域名清单 | **日常主要改这个** |
 | `custom-direct.list` | 自维护「强制走直连」域名清单 | **日常主要改这个** |
-| `ai.list` | AI 站点清单（走 🤖 人工智能 组） | 想加 AI 站点时动 |
+| `custom-ai.list` | AI 站点清单（走 🤖 人工智能 组） | 想加 AI 站点时动 |
 | `meta.list` | Meta 系站点清单（Facebook / Instagram / WhatsApp / Threads，走 📘 Meta 组） | 想加 Meta 系域名时动 |
 | `ShellClash_Full_Block.ini` | 旧母版，保留备查 | 不动 |
 
@@ -88,8 +88,22 @@ IP-CIDR,1.2.3.0/24              网段
 ruleset=🎥 NETFLIX,https://raw.githubusercontent.com/gjzbbs/xin/main/netflix.list
 ```
 
-`ruleset=` 后面的策略组名必须是 ini 里已经定义过的（见 `custom_proxy_group=` 段），
-否则生成的 YAML 会因为找不到策略组而报错。
+`ruleset=` 后面的策略组名必须与 `custom_proxy_group=` 里定义的名字**逐字一致**
+（emoji、空格、全角都不能差）。名字对不上时 subconverter 不会报错，
+而是**静默把整条 ruleset 连同它的规则全部丢弃**——表现就是「组在、但组内规则数为 0」，
+域名全落到别的组（常见是落进 🌍 国外媒体 或 🐟 漏网之鱼）。
+
+**还有一条**：新建策略组时不要和已有组共用同一个 emoji 前缀。
+例如已经有了 `🤖 人工智能`，再建 `🤖 Mate` 会被 subconverter 判为同前缀冲突而整组丢弃；
+换掉 emoji（这里是 `📘 Meta`）就正常。
+
+### ⚠️ 顺序决定成败
+
+Clash 规则是**从上往下第一条命中即停**。自维护的清单要放在通用清单**之前**，否则抢不过。
+
+具体到本仓库：`meta.list` 那条 ruleset 必须写在 `ACL4SSR/Clash/ProxyLite.list` 之前。
+放在后面时，`facebook.com` 会先被 ProxyLite 匹配走（落到 🚀 节点选择），
+`📘 Meta` 组永远是 0 条规则——**格式全对也没用，就是位置问题**。
 
 ---
 
@@ -99,8 +113,9 @@ ruleset=🎥 NETFLIX,https://raw.githubusercontent.com/gjzbbs/xin/main/netflix.l
 局域网 / UnBan / custom-direct.list      → 🎯 全球直连
 BanAD / BanProgramAD                     → 🛑 广告拦截 / 🍃 应用净化
 custom-proxy.list                        → 🚀 节点选择      ← 自维护代理优先
+meta.list                                → 📘 Meta          ← 必须早于 ProxyLite
 应用分流（Netflix/YouTube/AI/微软/苹果…）  → 各自策略组
-GEOIP,CN                                 → 🎯 全球直连
+ProxyLite / ChinaDomain / GEOIP,CN       → 🚀 节点选择 / 🎯 全球直连
 MATCH                                    → 🐟 漏网之鱼
 ```
 
