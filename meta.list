@@ -1,0 +1,36 @@
+# ============================================================
+# Meta 系站点清单（Facebook / Instagram / WhatsApp / Threads）
+# 命中本文件的域名 → 策略组「📘 Meta」
+#
+# 用法：直接在本文件末尾按同样格式加行，Commit 后自动生效。
+# 格式（每行一条，三部分逗号分隔）：
+#   DOMAIN-SUFFIX,facebook.com
+#   也可以写成 DOMAIN,graph.facebook.com / DOMAIN-KEYWORD,fbcdn
+# 注意：这里只写「域名 + 规则类型」，不在行尾写组名，
+#      组名由 ShellClash_Custom.ini 里对应的 ruleset= 行统一指定。
+# ============================================================
+DOMAIN-SUFFIX,facebook.com
+DOMAIN-SUFFIX,facebook.net
+DOMAIN-SUFFIX,fb.com
+DOMAIN-SUFFIX,fb.me
+DOMAIN-SUFFIX,fb.watch
+DOMAIN-SUFFIX,fbcdn.net
+DOMAIN-SUFFIX,fbcdn.com
+DOMAIN-SUFFIX,fbsbx.com
+DOMAIN-SUFFIX,fburl.com
+DOMAIN-SUFFIX,facebookcorewwwi.onion
+DOMAIN-SUFFIX,atmeta.com
+DOMAIN-SUFFIX,meta.com
+DOMAIN-SUFFIX,messenger.com
+DOMAIN-SUFFIX,instagram.com
+DOMAIN-SUFFIX,cdninstagram.com
+DOMAIN-SUFFIX,ig.me
+DOMAIN-SUFFIX,instagr.am
+DOMAIN-SUFFIX,whatsapp.com
+DOMAIN-SUFFIX,whatsapp.net
+DOMAIN-SUFFIX,wa.me
+DOMAIN-SUFFIX,whatsappbrand.com
+DOMAIN-SUFFIX,threads.net
+DOMAIN-SUFFIX,threads.com
+DOMAIN-KEYWORD,fbcdn
+DOMAIN-KEYWORD,whatsapp
