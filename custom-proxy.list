@@ -1,0 +1,9 @@
+# 自维护「强制走代理」清单
+# 格式（Clash classical 规则，一行一条，改完保存即生效）：
+#   DOMAIN-SUFFIX,example.org
+#   DOMAIN,www.example.org
+#   DOMAIN-KEYWORD,keyword
+# 说明：本文件由 subconverter 服务器下载，路由器无需访问 GitHub。
+#       命中本文件的域名走「🚀 节点选择」策略组。
+
+DOMAIN-SUFFIX,example.org
