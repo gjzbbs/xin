@@ -1,11 +1,13 @@
-# 自维护「🤖 人工智能」清单
+# 自维护「🤖 人工智能」分流清单
 #
-# 一行一条，格式：
+# 一行一条，格式（只认这三种，其他格式会被转换器忽略）：
 #   DOMAIN-SUFFIX,openai.com      含所有子域（推荐）
-#   DOMAIN,api.openai.com         精确域名
-#   DOMAIN-KEYWORD,openai         含关键字的域名（谨慎用，容易误伤）
-# 命中本清单的域名走「🤖 人工智能」策略组，
-# 改完保存（Commit），路由器执行一次「更新订阅」即生效。
+#   DOMAIN,api.openai.com         只匹配这一个精确域名
+#   DOMAIN-KEYWORD,openai         含关键字的域名（用不好会误伤，慎用）
+#
+# 命中本清单的域名走「🤖 人工智能」策略组。
+# 改完 Commit 保存，路由器执行一次「更新配置文件」即生效。
+# 注意：本文件由转换服务器下载，路由器不需要能连 GitHub。
 
 # ---------- OpenAI / ChatGPT ----------
 DOMAIN-SUFFIX,openai.com
@@ -14,7 +16,8 @@ DOMAIN-SUFFIX,chat.com
 DOMAIN-SUFFIX,sora.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
-DOMAIN-KEYWORD,openai
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,auth0.openai.com
 
 # ---------- Anthropic / Claude ----------
 DOMAIN-SUFFIX,anthropic.com
@@ -22,11 +25,11 @@ DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claudeusercontent.com
 
 # ---------- Google Gemini / AI Studio / DeepMind ----------
-DOMAIN,gemini.google.com
-DOMAIN,bard.google.com
-DOMAIN,aistudio.google.com
-DOMAIN,makersuite.google.com
-DOMAIN,generativelanguage.googleapis.com
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,generativelanguage.googleapis.com
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
 
@@ -43,18 +46,28 @@ DOMAIN-SUFFIX,pplx.ai
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,grok.com
 
-# ---------- Midjourney / Stability / Runway ----------
+# ---------- 图像 / 视频生成 ----------
 DOMAIN-SUFFIX,midjourney.com
 DOMAIN-SUFFIX,stability.ai
 DOMAIN-SUFFIX,runwayml.com
 DOMAIN-SUFFIX,runway.com
+DOMAIN-SUFFIX,ideogram.ai
+DOMAIN-SUFFIX,leonardo.ai
+DOMAIN-SUFFIX,lumalabs.ai
+DOMAIN-SUFFIX,pika.art
+DOMAIN-SUFFIX,clipdrop.co
 
-# ---------- HuggingFace / 模型托管 ----------
+# ---------- 音频 / 语音生成 ----------
+DOMAIN-SUFFIX,elevenlabs.io
+DOMAIN-SUFFIX,suno.com
+DOMAIN-SUFFIX,suno.ai
+DOMAIN-SUFFIX,heygen.com
+DOMAIN-SUFFIX,synthesia.io
+DOMAIN-SUFFIX,descript.com
+
+# ---------- 模型平台 / 聚合 API ----------
 DOMAIN-SUFFIX,huggingface.co
 DOMAIN-SUFFIX,hf.co
-DOMAIN-SUFFIX,hf.space
-
-# ---------- 通用 API 托管 ----------
 DOMAIN-SUFFIX,openrouter.ai
 DOMAIN-SUFFIX,together.ai
 DOMAIN-SUFFIX,together.xyz
@@ -62,33 +75,46 @@ DOMAIN-SUFFIX,replicate.com
 DOMAIN-SUFFIX,fireworks.ai
 DOMAIN-SUFFIX,groq.com
 DOMAIN-SUFFIX,mistral.ai
-DOMAIN-SUFFIX,cohere.ai
 DOMAIN-SUFFIX,cohere.com
-DOMAIN-SUFFIX,ai21.com
+DOMAIN-SUFFIX,cohere.ai
+DOMAIN-SUFFIX,anyscale.com
+DOMAIN-SUFFIX,deepinfra.com
+DOMAIN-SUFFIX,novita.ai
+DOMAIN-SUFFIX,siliconflow.com
+DOMAIN-SUFFIX,siliconflow.cn
 
-# ---------- Poe / 聚合站 ----------
+# ---------- 对话 / 角色类 ----------
 DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,character.ai
 DOMAIN-SUFFIX,pi.ai
 DOMAIN-SUFFIX,you.com
 DOMAIN-SUFFIX,phind.com
+DOMAIN-SUFFIX,inflection.ai
 
 # ---------- 编程助手 ----------
 DOMAIN-SUFFIX,cursor.com
 DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,codeium.com
 DOMAIN-SUFFIX,windsurf.com
+DOMAIN-SUFFIX,code-cursor.com
 DOMAIN-SUFFIX,tabnine.com
 DOMAIN-SUFFIX,sourcegraph.com
+DOMAIN-SUFFIX,continue.dev
+DOMAIN-SUFFIX,replit.com
 
-# ---------- 图像 / 音频 / 视频生成 ----------
-DOMAIN-SUFFIX,elevenlabs.io
-DOMAIN-SUFFIX,suno.com
-DOMAIN-SUFFIX,suno.ai
-DOMAIN-SUFFIX,heygen.com
-DOMAIN-SUFFIX,synthesia.io
+# ---------- 其他 AI 工具 ----------
+DOMAIN-SUFFIX,notion.so
+DOMAIN-SUFFIX,notion.site
+DOMAIN-SUFFIX,scale.com
+DOMAIN-SUFFIX,weights.gg
+DOMAIN-SUFFIX,langchain.com
+DOMAIN-SUFFIX,llamaindex.ai
+DOMAIN-SUFFIX,ollama.com
+DOMAIN-SUFFIX,lmstudio.ai
 
-# ---------- 国内 AI（如需直连，把下面几行移到 custom-direct.list）----------
-# DOMAIN-SUFFIX,deepseek.com
-# DOMAIN-SUFFIX,moonshot.cn
+# ---------- 国内 AI（一般直连更快，按需取消下面注释）----------
+# DOMAIN-SUFFIX,dashscope.aliyuncs.com
+# DOMAIN-SUFFIX,ark.cn-beijing.volces.com
 # DOMAIN-SUFFIX,bigmodel.cn
+# DOMAIN-SUFFIX,moonshot.cn
+# DOMAIN-SUFFIX,deepseek.com
