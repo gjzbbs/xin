@@ -85,8 +85,10 @@ IP-CIDR,1.2.3.0/24              网段
 改 `ShellClash_Custom.ini`，新增一条 ruleset 指到你自己的清单，例如：
 
 ```ini
-ruleset=🎥 NETFLIX,https://raw.githubusercontent.com/gjzbbs/xin/main/netflix.list
+ruleset=🎥 NETFLIX,https://raw.githubusercontent.com/gjzbbs/xin/main/netflix.list?v=1
 ```
+
+（`?v=1` 必须有，改内容时递增，原因见第六节。）
 
 `ruleset=` 后面的策略组名必须与 `custom_proxy_group=` 里定义的名字**逐字一致**
 （emoji、空格、全角都不能差）。名字对不上时 subconverter 不会报错，
@@ -126,15 +128,29 @@ MATCH                                    → 🐟 漏网之鱼
 
 ## 五、已实测验证（爱快 192.168.11.1，mihomo v1.19.33）
 
-用真实订阅链路 + 本 ini 请求转换后端，实测结果：
+用真实订阅链路（3 条源）+ 本 ini 请求转换后端，连测 3 次结果完全一致：
 
 ```
-groups=32  rules=13499
+groups=32  rules=14235
+- DOMAIN-SUFFIX,chatgpt.com,🤖 人工智能      ← custom-ai.list 生效（组内 79 条）
+- DOMAIN-SUFFIX,claude.ai,🤖 人工智能
+- DOMAIN-SUFFIX,gemini.google.com,🤖 人工智能
+- DOMAIN-SUFFIX,facebook.com,📘 Meta        ← meta.list 生效（组内 556 条）
+- DOMAIN-SUFFIX,instagram.com,📘 Meta
+- DOMAIN-SUFFIX,whatsapp.com,📘 Meta
+- DOMAIN-SUFFIX,threads.net,📘 Meta
 - DOMAIN-SUFFIX,example.com,🎯 全球直连     ← custom-direct.list 生效
 - DOMAIN-SUFFIX,example.org,🚀 节点选择     ← custom-proxy.list 生效
-- DOMAIN-SUFFIX,facebook.com,📘 Meta        ← meta.list 生效
 - GEOIP,CN,🎯 全球直连                       ← GEOIP 兜底生效
 - MATCH,🐟 漏网之鱼                          ← 末尾兜底生效
+```
+
+各策略组实际承载规则数（`grep -oE ',[^,]+$' | sort | uniq -c`）：
+
+```
+🍃 应用净化 997    🎯 全球直连 727   🛑 广告拦截 588   📘 Meta 556
+🎮 外服游戏 548    🌍 国外媒体 353   🚀 节点选择 347   🤖 人工智能 79
+Ⓜ️ 微软服务 79     🎥 NETFLIX 55     Ⓜ️ 苹果服务 19
 ```
 
 关键点：转换请求**必须带 `insert=true`**，否则后端只返回 proxies、不返回 proxy-groups 和 rules。
@@ -142,17 +158,42 @@ ShellCrash 的 `starts/core_config.sh` 里已经硬编码了 `insert=true`，走
 
 ---
 
-## 六、改完为什么有时不立刻生效
+## 六、⚠️⚠️ 改完 `.list` 必须递增 `?v=`（最容易踩的坑）
 
-`sub.jwsc.eu.org` 是**多实例 + 带缓存**的转换后端。同一个 config URL 连发三次，
-出现过前两次返回旧版本（32 组里的第 16 组还是旧名）、第三次才拿到新内容的情况。
+**subconverter 会按 `.list` 的文件 URL 缓存文件内容本身**，不是只缓存 ini。
+
+所以：你改了 `custom-proxy.list` 的内容、甚至删光了重写，只要 ini 里那条 ruleset 的
+URL 一个字没变，转换服务器拿到的还是**旧版本**——表现就是「我明明加了规则，路由器上一条都没有」。
+
+本仓库的 ini 里，四条自维护清单都已经带上了版本号：
+
+```ini
+ruleset=🎯 全球直连,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-direct.list?v=1
+ruleset=🚀 节点选择,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-proxy.list?v=1
+ruleset=📘 Meta,https://raw.githubusercontent.com/gjzbbs/xin/main/meta.list?v=1
+ruleset=🤖 人工智能,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-ai.list?v=1
+```
+
+**操作纪律：每次改完任何一个 `.list` 的内容，回到 `ShellClash_Custom.ini` 把对应那行的
+`?v=1` 改成 `?v=2`、`?v=3`……（任意新串都行，只要和上次不同），两个文件一起 Commit。**
+
+只改 `.list` 不改 `?v=` = 改动不生效，这是实测确认过的，不是猜测。
+
+> 为什么加 `?v=` 不影响 Clash：转换服务器是先把 `.list` 下载下来、解析成规则再写进最终 YAML，
+> 最终配置里只剩 `DOMAIN-SUFFIX,xxx,组名`，查询串不会进 Clash 配置。
+
+---
+
+## 七、改完为什么有时不立刻生效
+
+`sub.jwsc.eu.org` 是**多实例 + 带缓存**的转换后端。连测多次出现过前两次返回旧版本、
+第三次才拿到新内容的情况（缓存过期有延迟）。
 
 所以：
 
 1. 改完 GitHub 后等 1–2 分钟再让路由器生成；
 2. 一次没生效不算改错，**重试一次**（ShellCrash 菜单 `7 更新配置文件`）；
-3. 排查时给 config URL 加个查询串强制绕缓存，例如
-   `...ShellClash_Custom.ini?v=2`（只影响你手动自测，不影响 ini 内容）。
+3. 确认是缓存还是真的写错：连测 3 次，3 次都一样才算定论。
 
-> 用 `?v=` 自测时注意：某些后端实例会把带 query 的 URL 当成另一个缓存键，
-> 所以自测结果和路由器实际结果可能短暂不一致，以路由器生成为准。
+> 自测时不要给 ini 的 config URL 加 `?v=`。某些后端实例会把带 query 的 URL 当成另一个
+> 缓存键，结果和路由器实际生成的不一致。要清缓存就清 `.list` 的 `?v=`，别动 ini 的。
