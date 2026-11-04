@@ -38,16 +38,18 @@ ShellCrash 的规则来源是 `configs/servers.list` 里 `^5` 开头的行，由
 4. 回到菜单 `4 选取在线配置规则模版`，选中 `520`，`rule_link` 会写成 20（序号，不是 520）
 5. 返回上级 → `1 在线生成配置文件` → 确认后生成
 
-**如果路由器访问不了 GitHub**：把 url 换成 jsdelivr 镜像，三选一都实测可用：
+**关于网络**：这个 ini 是**转换服务器**（`sub.jwsc.eu.org` 等）去下载的，不是路由器下载。
+所以路由器本身连不上 GitHub 完全不影响，`raw.githubusercontent.com` 直接写就行。
+
+只有一种情况需要换镜像——你在电脑浏览器里手动拼转换链接自测时。实测可用的三个：
 
 ```
-https://fastly.jsdelivr.net/gh/gjzbbs/xin@main/ShellClash_Custom.ini
 https://testingcf.jsdelivr.net/gh/gjzbbs/xin@main/ShellClash_Custom.ini
 https://gcore.jsdelivr.net/gh/gjzbbs/xin@main/ShellClash_Custom.ini
+https://fastly.jsdelivr.net/gh/gjzbbs/xin@main/ShellClash_Custom.ini
 ```
 
-> 注意：`.ini` 里引用的所有 `*.list` 都是**转换服务器**去下载的，路由器本身不需要能连 GitHub。
-> 只有 ini 本体这一行需要考虑镜像。
+ini 里引用的所有 `*.list` 同样由转换服务器下载，路由器不需要能连 GitHub。
 
 ---
 
