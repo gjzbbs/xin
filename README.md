@@ -215,17 +215,28 @@ ruleset=🤖 人工智能,https://raw.githubusercontent.com/gjzbbs/xin/main/cust
 `github_mirror`，会把所有指向 `raw.githubusercontent.com` 的 config / ruleset 自动改写成镜像。
 镜像列表存在 `/etc/mnt/plugins/configs/subweb/github_mirror.conf`。
 
-2026-11-05 实测：`testingcf.jsdelivr.net` 对 `ShellClash_Custom.ini` **长期返回旧版**
-（10174 字节、家宽组仍是 `url-test`），连 `purge.jsdelivr.net` 清缓存也无效；
-`gcore.jsdelivr.net` 立刻就是新版（10329 字节、`select`）。
-→ 已把镜像顺序改成 **`https://gcore.jsdelivr.net,https://testingcf.jsdelivr.net`**（gcore 优先）。
-原配置备份在路由器 `/tmp/github_mirror.conf.bak`。
+2026-11-05 实测的完整经过：
 
-自己核对 ini 是否最新，就用 gcore 那条地址：
+| 镜像 | 对 `ShellClash_Custom.ini` | 对 `.list` | 结论 |
+|---|---|---|---|
+| `testingcf.jsdelivr.net` | 长期卡在 10174 字节旧版（家宽组还是 `url-test`），`purge` 也刷不动 | 正常 | 不能用 |
+| `gcore.jsdelivr.net` | 一度拿到 10329 新版，但**新增 ruleset 后**又卡在 10329（缺 `custom-saver`），purge 无效 | 正常（392 字节） | 只能兜底 |
+| `gh-proxy.com` | 直读 raw，立刻 10527（含 `custom-saver`） | 正常，0.4–2.5s | **首选** |
+| `ghproxy.net` | 能读，但拉 ACL4SSR 各规则集要 1–7s、部分源 0 字节，整链超时、rules 掉到 9609 条且十几个组归零 | 时好时坏 | 不能用 |
+
+→ 当前镜像顺序：**`https://gh-proxy.com,https://gcore.jsdelivr.net`**（写在
+`/etc/mnt/plugins/configs/subweb/github_mirror.conf`，只改这一行再 `service.sh restart` 就生效）。
+历史备份：`/tmp/github_mirror.conf.bak`（testingcf 优先）、`/tmp/github_mirror.conf.bak2`（gcore 优先）。
+
+> 根因提醒：jsdelivr 对 `@main` 分支文件是**按 CDN 边缘节点缓存**的，`purge.jsdelivr.net`
+> 返回 `"status":"finished"` 也不代表每个边缘节点都刷了。而 `gh-proxy.com` 是实时回源，
+> 所以一旦改了 ini 的结构（不是只改 `.list` 内容），优先信 gh-proxy 的结果。
+
+自己核对 ini 是否最新，就用 gh-proxy 那条地址：
 
 ```bash
-curl -s "https://gcore.jsdelivr.net/gh/gjzbbs/xin@main/ShellClash_Custom.ini" | wc -c
-# 应为 10329，且 grep 'custom_proxy_group=🏠' 应看到 `select`
+curl -s "https://gh-proxy.com/https://raw.githubusercontent.com/gjzbbs/xin/main/ShellClash_Custom.ini" | wc -c
+# 应为 10527，且 grep 'custom-saver' 应能命中
 ```
 
 ---
@@ -241,9 +252,26 @@ curl -s "https://gcore.jsdelivr.net/gh/gjzbbs/xin@main/ShellClash_Custom.ini" | 
 | Gemini / AI Studio / generativelanguage / DeepMind 等 29 条 | `custom-ai.list`（🤖 人工智能） |
 | `DOMAIN-KEYWORD,rewards` | `custom-direct.list`（🎯 全球直连，该组默认即 DIRECT） |
 | namecheap / cloudflare / trycloudflare / ascsonoway / atomgit | `custom-auto.list`（♻️ 自动选择） |
+| `DOMAIN-SUFFIX,bigmelook.com` | `custom-saver.list`（📺 省流节点） |
 | `RULE-SET,MetaMeta,🤖 人工智能` | 本仓库 `meta.list` → `📘 Meta` 组已覆盖同一批域名 |
 
-备份留在路由器上：`yamls/rules.yaml.migrated.20261105`（2404 字节，原样未改）。
+备份留在路由器上：`yamls/rules.yaml.migrated.20261105`（2404 字节，原样未改）；
+最后一次残留的 1 条（bigmelook）另存为 `yamls/rules.yaml.final.bak.20261105`（48 字节）。
+
+> 中间踩过的坑：清空后 `rules.yaml` 又被写回过一条 `bigmelook.com`（来自更早的
+> `rules.yaml.bak`，Oct 25 那份）。现在这条规则已经进了仓库的 `custom-saver.list`，
+> 所以第二次清空不会再丢分流。
+
+### 8.1 最终状态（2026-11-05 11:20 实测）
+
+```
+路由器 yamls/rules.yaml            0 字节
+活配置 /tmp/ShellCrash/config.yaml  #自定义规则 残留 = 0，rules = 14166
+内核 127.0.0.1:9999               v1.19.33，/rules = 14166，/proxies = 125
+按组：🎯 全球直连 728 │ 📘 Meta 556 │ 🤖 人工智能 104 │ ♻️ 自动选择 5 │ 📺 省流节点 1
+🏠 家宽节点                        type: select，18 个候选，不测速
+生成链路（连测 4 次一致）           size=882401，groups=33，rules=14166
+```
 
 **以后要加规则，改本仓库对应的 `.list`（记得递增 `?v=`），不要再往路由器菜单里加**——
 否则又会出现「GitHub 上没有、换设备就丢」的情况。
