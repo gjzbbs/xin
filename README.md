@@ -14,6 +14,7 @@
 | `custom-proxy.list` | 自维护「强制走代理」域名清单 | **日常主要改这个** |
 | `custom-direct.list` | 自维护「强制走直连」域名清单 | **日常主要改这个** |
 | `custom-ai.list` | AI 站点清单（走 🤖 人工智能 组） | 想加 AI 站点时动 |
+| `custom-auto.list` | 「自动选最快节点」清单（走 ♻️ 自动选择 组，如 cloudflare / namecheap / atomgit） | 想加不挑线路的站点时动 |
 | `meta.list` | Meta 系站点清单（Facebook / Instagram / WhatsApp / Threads，走 📘 Meta 组） | 想加 Meta 系域名时动 |
 | `ShellClash_Full_Block.ini` | 旧母版，保留备查 | 不动 |
 
@@ -116,6 +117,7 @@ Clash 规则是**从上往下第一条命中即停**。自维护的清单要放�
 BanAD / BanProgramAD                     → 🛑 广告拦截 / 🍃 应用净化
 custom-proxy.list                        → 🚀 节点选择      ← 自维护代理优先
 meta.list                                → 📘 Meta          ← 必须早于 ProxyLite
+custom-auto.list                         → ♻️ 自动选择      ← 自动挑最快节点
 应用分流（Netflix/YouTube/AI/微软/苹果…）  → 各自策略组
 ProxyLite / ChinaDomain / GEOIP,CN       → 🚀 节点选择 / 🎯 全球直连
 MATCH                                    → 🐟 漏网之鱼
@@ -131,7 +133,7 @@ MATCH                                    → 🐟 漏网之鱼
 用真实订阅链路（3 条源）+ 本 ini 请求转换后端，连测 3 次结果完全一致：
 
 ```
-groups=33  rules=14055
+groups=33  rules=14165
 - DOMAIN-SUFFIX,chatgpt.com,🤖 人工智能      ← custom-ai.list 生效（组内 79 条）
 - DOMAIN-SUFFIX,claude.ai,🤖 人工智能
 - DOMAIN-SUFFIX,gemini.google.com,🤖 人工智能
@@ -141,6 +143,8 @@ groups=33  rules=14055
 - DOMAIN-SUFFIX,threads.net,📘 Meta
 - DOMAIN-SUFFIX,example.com,🎯 全球直连     ← custom-direct.list 生效
 - DOMAIN-SUFFIX,example.org,🚀 节点选择     ← custom-proxy.list 生效
+- DOMAIN-SUFFIX,atomgit.com,♻️ 自动选择      ← custom-auto.list 生效
+- DOMAIN-SUFFIX,cloudflare.com,♻️ 自动选择
 - GEOIP,CN,🎯 全球直连                       ← GEOIP 兜底生效
 - MATCH,🐟 漏网之鱼                          ← 末尾兜底生效
 ```
@@ -168,13 +172,14 @@ ShellCrash 的 `starts/core_config.sh` 里已经硬编码了 `insert=true`，走
 所以：你改了 `custom-proxy.list` 的内容、甚至删光了重写，只要 ini 里那条 ruleset 的
 URL 一个字没变，转换服务器拿到的还是**旧版本**——表现就是「我明明加了规则，路由器上一条都没有」。
 
-本仓库的 ini 里，四条自维护清单都已经带上了版本号：
+本仓库的 ini 里，五条自维护清单都已经带上了版本号：
 
 ```ini
-ruleset=🎯 全球直连,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-direct.list?v=1
+ruleset=🎯 全球直连,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-direct.list?v=2
 ruleset=🚀 节点选择,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-proxy.list?v=1
 ruleset=📘 Meta,https://raw.githubusercontent.com/gjzbbs/xin/main/meta.list?v=1
-ruleset=🤖 人工智能,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-ai.list?v=1
+ruleset=♻️ 自动选择,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-auto.list?v=1
+ruleset=🤖 人工智能,https://raw.githubusercontent.com/gjzbbs/xin/main/custom-ai.list?v=2
 ```
 
 **操作纪律：每次改完任何一个 `.list` 的内容，回到 `ShellClash_Custom.ini` 把对应那行的
@@ -200,3 +205,26 @@ ruleset=🤖 人工智能,https://raw.githubusercontent.com/gjzbbs/xin/main/cust
 
 > 自测时不要给 ini 的 config URL 加 `?v=`。某些后端实例会把带 query 的 URL 当成另一个
 > 缓存键，结果和路由器实际生成的不一致。要清缓存就清 `.list` 的 `?v=`，别动 ini 的。
+
+---
+
+## 八、路由器本地自定义规则已全部迁到本仓库（2026-11-05）
+
+以前在 ShellCrash 菜单里加的「自定义规则」是存在路由器本地的
+`/etc/mnt/plugins/configs/shellcrash/yamls/rules.yaml`，只在那一台机器上有、GitHub 上看不到。
+2026-11-05 已把它们全部搬进本仓库，路由器上的 `rules.yaml` **已清空**：
+
+| 原规则（路由器 rules.yaml） | 现在在哪 |
+|---|---|
+| Gemini / AI Studio / generativelanguage / DeepMind 等 29 条 | `custom-ai.list`（🤖 人工智能） |
+| `DOMAIN-KEYWORD,rewards` | `custom-direct.list`（🎯 全球直连，该组默认即 DIRECT） |
+| namecheap / cloudflare / trycloudflare / ascsonoway / atomgit | `custom-auto.list`（♻️ 自动选择） |
+| `RULE-SET,MetaMeta,🤖 人工智能` | 本仓库 `meta.list` → `📘 Meta` 组已覆盖同一批域名 |
+
+备份留在路由器上：`yamls/rules.yaml.migrated.20261105`（2404 字节，原样未改）。
+
+**以后要加规则，改本仓库对应的 `.list`（记得递增 `?v=`），不要再往路由器菜单里加**——
+否则又会出现「GitHub 上没有、换设备就丢」的情况。
+
+改完让路由器生效：ShellCrash 菜单 `7 更新配置文件`，或命令行
+`cd /tmp/iktmp/plugins/shellcrash/bin && sh task/task.sh hotupdate`（热重载，不断网）。
