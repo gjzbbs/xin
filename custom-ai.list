@@ -112,6 +112,38 @@ DOMAIN-SUFFIX,llamaindex.ai
 DOMAIN-SUFFIX,ollama.com
 DOMAIN-SUFFIX,lmstudio.ai
 
+# ---------- 从路由器 rules.yaml 迁移（2026-11-05 同步，原为 ShellCrash 自定义规则）----------
+# Gemini 网页 / AI Studio
+DOMAIN,ai.google.dev
+DOMAIN-SUFFIX,generativeai.google
+# Gemini 后端 / API（“地区不可用”多因这里没走代理）
+DOMAIN-SUFFIX,geller-pa.googleapis.com
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN,alkalicore-pa.clients6.google.com
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com
+# 登录与鉴权（必须走代理，否则地区校验会绕过）
+DOMAIN,accounts.google.com
+DOMAIN,apis.google.com
+DOMAIN,www.google.com
+DOMAIN,signaler-pa.clients6.google.com
+# 关键词兜底
+DOMAIN-KEYWORD,gemini
+DOMAIN-KEYWORD,generativelanguage
+DOMAIN-KEYWORD,generativeai
+DOMAIN-KEYWORD,aistudio
+DOMAIN-KEYWORD,deepmind
+# 其他 AI 站点
+DOMAIN-SUFFIX,b.ai
+DOMAIN-SUFFIX,gorouter.app
+DOMAIN-SUFFIX,agentrouter.org
+DOMAIN-SUFFIX,manus.im
+DOMAIN-SUFFIX,metamask.com
+DOMAIN-SUFFIX,museai.com
+DOMAIN-SUFFIX,ecto1.ai
+DOMAIN-SUFFIX,accountscenter.com
+DOMAIN,fb.okta.com
+
 # ---------- 国内 AI（一般直连更快，按需取消下面注释）----------
 # DOMAIN-SUFFIX,dashscope.aliyuncs.com
 # DOMAIN-SUFFIX,ark.cn-beijing.volces.com
