@@ -131,7 +131,7 @@ MATCH                                    → 🐟 漏网之鱼
 用真实订阅链路（3 条源）+ 本 ini 请求转换后端，连测 3 次结果完全一致：
 
 ```
-groups=32  rules=14235
+groups=33  rules=14055
 - DOMAIN-SUFFIX,chatgpt.com,🤖 人工智能      ← custom-ai.list 生效（组内 79 条）
 - DOMAIN-SUFFIX,claude.ai,🤖 人工智能
 - DOMAIN-SUFFIX,gemini.google.com,🤖 人工智能
@@ -144,6 +144,9 @@ groups=32  rules=14235
 - GEOIP,CN,🎯 全球直连                       ← GEOIP 兜底生效
 - MATCH,🐟 漏网之鱼                          ← 末尾兜底生效
 ```
+
+`📘 Meta` 组的候选顺序：`🚀 节点选择 / ♻️ 自动选择 / 🏠 家宽节点 / 🇺🇲 美国节点 / 🇭🇰 香港节点 / 🇸🇬 新加坡节点 / 🚀 手动切换`
+—— 想让它默认走住宅线路，在面板里选「🏠 家宽节点」即可（该组是 url-test，只收节点名含 `home` 或 `家宽/住宅` 的节点）。
 
 各策略组实际承载规则数（`grep -oE ',[^,]+$' | sort | uniq -c`）：
 
