@@ -1,0 +1,19 @@
+# 自维护「♻️ 自动选择」分流清单
+#
+# 一行一条，格式（只认这三种）：
+#   DOMAIN-SUFFIX,example.com      含所有子域（推荐）
+#   DOMAIN,www.example.com         只匹配这一个精确域名
+#   DOMAIN-KEYWORD,keyword         含关键字的域名（慎用）
+#
+# 命中本清单的域名走「♻️ 自动选择」策略组（url-test，自动挑延迟最低的节点）。
+# 适合：打不开但又不挑线路的站点、需要多节点轮换才稳的服务。
+#
+# 改完 Commit 保存，路由器执行一次「更新配置文件」即生效。
+# 注意：本文件由转换服务器下载，路由器不需要能连 GitHub。
+
+# ---- 从路由器 rules.yaml 迁移（2026-11-05 同步）----
+DOMAIN-SUFFIX,namecheap.com
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,trycloudflare.com
+DOMAIN-SUFFIX,ascsonoway.com
+DOMAIN-SUFFIX,atomgit.com
