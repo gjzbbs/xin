@@ -1,0 +1,5 @@
+# 省流/低倍率节点专用清单 —— 目标策略组：📺 省流节点（url-test，只收低倍率节点）
+# 格式：DOMAIN-SUFFIX,example.com / DOMAIN,www.example.com / DOMAIN-KEYWORD,xxx
+# 由 ShellCrash_Custom.ini 里这条 ruleset 引用，改完记得把 ?v= 递增
+# 说明：.list 由转换服务器下载，路由器不需要能访问 GitHub。
+DOMAIN-SUFFIX,bigmelook.com
