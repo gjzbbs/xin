@@ -150,7 +150,10 @@ groups=33  rules=14165
 ```
 
 `📘 Meta` 组的候选顺序：`🚀 节点选择 / ♻️ 自动选择 / 🏠 家宽节点 / 🇺🇲 美国节点 / 🇭🇰 香港节点 / 🇸🇬 新加坡节点 / 🚀 手动切换`
-—— 想让它默认走住宅线路，在面板里选「🏠 家宽节点」即可（该组是 url-test，只收节点名含 `home` 或 `家宽/住宅` 的节点）。
+—— 想让它默认走住宅线路，在面板里选「🏠 家宽节点」即可（该组是 select 手动选择组，只收节点名含 `home` 或 `家宽/住宅` 的节点，共 18 个，不测速、不自动切换）。
+
+`🏠 家宽节点` 组成员（2026-11-05 实测）：
+`🇰🇷 Home-KR / 🇯🇵 Home-JP / 🇰🇷 Home-KR-CF / 🇯🇵 Home-JP-CF / 🇺🇸 Home-US / 🇺🇸 Home-US-CF / 🇸🇬 Home-KR-SG / 🇸🇬 Home-JP-SG / 🇸🇬 Home-KR-SG-CF / 🇸🇬 Home-JP-SG-CF / 🇨🇳 TW 01 ISP家宽 / 🇨🇳 TW 02 ISP家宽 / 🇲🇾 MY 01 ISP家宽 / 🏳️‍🌈 HK高倍家宽01 3x流量 / 🏳️‍🌈 HK高倍家宽02 3x流量 / 🏳️‍🌈 TW高倍家宽01 3x流量 / 🏳️‍🌈 TW高倍家宽02 3x流量 / 🏳️‍🌈 MY高倍家宽 3x流量`
 
 各策略组实际承载规则数（`grep -oE ',[^,]+$' | sort | uniq -c`）：
 
@@ -205,6 +208,25 @@ ruleset=🤖 人工智能,https://raw.githubusercontent.com/gjzbbs/xin/main/cust
 
 > 自测时不要给 ini 的 config URL 加 `?v=`。某些后端实例会把带 query 的 URL 当成另一个
 > 缓存键，结果和路由器实际生成的不一致。要清缓存就清 `.list` 的 `?v=`，别动 ini 的。
+
+### 七·补：这台路由器走的是本机 subweb（25500），镜像缓存是第二个坑
+
+本机 `subweb` 插件（`/tmp/iktmp/plugins/subweb/bin/app.template.yaml`）配了
+`github_mirror`，会把所有指向 `raw.githubusercontent.com` 的 config / ruleset 自动改写成镜像。
+镜像列表存在 `/etc/mnt/plugins/configs/subweb/github_mirror.conf`。
+
+2026-11-05 实测：`testingcf.jsdelivr.net` 对 `ShellClash_Custom.ini` **长期返回旧版**
+（10174 字节、家宽组仍是 `url-test`），连 `purge.jsdelivr.net` 清缓存也无效；
+`gcore.jsdelivr.net` 立刻就是新版（10329 字节、`select`）。
+→ 已把镜像顺序改成 **`https://gcore.jsdelivr.net,https://testingcf.jsdelivr.net`**（gcore 优先）。
+原配置备份在路由器 `/tmp/github_mirror.conf.bak`。
+
+自己核对 ini 是否最新，就用 gcore 那条地址：
+
+```bash
+curl -s "https://gcore.jsdelivr.net/gh/gjzbbs/xin@main/ShellClash_Custom.ini" | wc -c
+# 应为 10329，且 grep 'custom_proxy_group=🏠' 应看到 `select`
+```
 
 ---
 
