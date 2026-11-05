@@ -14,5 +14,9 @@
 #
 # 改完保存（Commit），路由器执行一次「更新订阅」即生效。
 
+# ---- 从路由器 rules.yaml 迁移（2026-11-05 同步）----
+# 原规则是 DOMAIN-KEYWORD,rewards,DIRECT；这里走「🎯 全球直连」（该组默认即 DIRECT）
+DOMAIN-KEYWORD,rewards
+
 # ---- 示例，按需删改 ----
 DOMAIN-SUFFIX,example.com
