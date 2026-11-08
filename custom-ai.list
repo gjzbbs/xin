@@ -144,6 +144,7 @@ DOMAIN-SUFFIX,ecto1.ai
 DOMAIN-SUFFIX,accountscenter.com
 DOMAIN,fb.okta.com
 DOMAIN-SUFFIX,tabbit.ai
+DOMAIN-SUFFIX,lightvela.ai
 
 # ---------- 国内 AI（一般直连更快，按需取消下面注释）----------
 # DOMAIN-SUFFIX,dashscope.aliyuncs.com
