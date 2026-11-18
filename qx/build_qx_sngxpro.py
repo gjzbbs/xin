@@ -53,7 +53,7 @@ MAP = {
 HIS = {
     "Bing", "延迟最低", "TikTok", "新加坡", "美国", "日本", "韩国", "香港", "台湾",
     "特殊", "IPLC", "苹果服务", "全球加速", "港台番剧", "国际媒体", "声田音乐",
-    "网飞影视", "电报代理", "黑白名单", "direct", "reject", "proxy",
+    "网飞影视", "电报代理", "黑白名单", "Meta", "direct", "reject", "proxy",
 }
 
 
@@ -95,7 +95,8 @@ def main():
         "#       geoip, cn, direct 与 final, 黑白名单 两条删掉（本文件已含）",
         "",
     ]
-    open(os.path.join(HERE, "QX-sngxpro-all.list"), "w", encoding="utf-8", newline="\n").write(
+    suffix = "" if mg == "全球加速" else "-" + mg
+    open(os.path.join(HERE, "QX-sngxpro-all%s.list" % suffix), "w", encoding="utf-8", newline="\n").write(
         "\n".join(hdr + out) + "\n")
 
     # ---- 只有 Meta / muse（源里策略是 📘 Meta 的行）
@@ -112,11 +113,11 @@ def main():
         "#       （QX 1.0.30+ 支持调整本地/远程加载顺序；否则本地 final 会先截断，本资源不生效）",
         "",
     ]
-    open(os.path.join(HERE, "QX-sngxpro-meta.list"), "w", encoding="utf-8", newline="\n").write(
+    open(os.path.join(HERE, "QX-sngxpro-meta%s.list" % suffix), "w", encoding="utf-8", newline="\n").write(
         "\n".join(mhdr + meta) + "\n")
 
-    print("全部 %d 条 → qx/QX-sngxpro-all.list" % len(out))
-    print("Meta  %d 条 → qx/QX-sngxpro-meta.list（策略=%s）" % (len(meta), mg))
+    print("全部 %d 条 → qx/QX-sngxpro-all%s.list" % (len(out), suffix))
+    print("Meta  %d 条 → qx/QX-sngxpro-meta%s.list（策略=%s）" % (len(meta), suffix, mg))
     if bad:
         print("未映射到现有策略的名字：%s" % "、".join(sorted(bad)))
         return 1
