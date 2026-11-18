@@ -172,3 +172,36 @@ python qx/validate_qx.py
 ```
 
 QX 里验证分流：打开日志（QX 主界面 → 底部「日志」）看某条连接命中的规则集 tag，例如访问 `muse.ai` 应命中 `05 📘 Meta`。
+
+---
+
+## 七、按「少年歌行PRO」小白配置的组名重新映射
+
+`qx/build_qx_sngxpro.py` 把同一套规则改写成那套配置的组名（`Bing` / `延迟最低` / `全球加速` / `黑白名单` / `网飞影视` / `国际媒体` / `港台番剧` / `电报代理` / `IPLC` / `苹果服务` / 地区组），**目标配置的 `[policy]` 不用改一个字**。
+
+```bash
+python qx/build_qx_sngxpro.py                     # 📘 Meta 落到「全球加速」
+python qx/build_qx_sngxpro.py --meta-group Meta   # 你若新加了 Meta 组，落到它
+```
+
+产物：
+
+| 文件 | 条数 | 用法 |
+|---|---|---|
+| `qx/QX-sngxpro-meta.list` | 556 | 只要 muse / Meta 那套。加资源后**拖到「本地规则」上面一行**，配置文件不用改 |
+| `qx/QX-sngxpro-all.list` | 5133 | 整套分流，末尾自带 `geoip, cn, direct` 与 `final, 黑白名单`；用这个要**删掉** `[filter_local]` 里对应的两条 |
+
+映射关系（本仓库 33 组 → 那套配置的组）：
+
+```
+🎯 全球直连 → direct            🛑 广告拦截 / 🍃 应用净化 → reject
+🚀 节点选择 → 全球加速           📘 Meta → 全球加速（或 --meta-group 指定）
+♻️ 自动选择 / 📺 省流节点 → 延迟最低   📢 谷歌FCM / 🤖 人工智能 → 全球加速
+🎥 NETFLIX / 🎥 DisneyP → 网飞影视     🎥 YouTube / 🌍 国外媒体 → 国际媒体
+📺 哔哩海外 / 📺 巴哈姆特 → 港台番剧   Ⓜ️ 微软服务 → Bing
+🍎 苹果服务 → 苹果服务           📲 电报消息 → 电报代理
+🎮 外服游戏 → IPLC              🌏 国内媒体 / 🎶 网易音乐 → direct
+🐟 漏网之鱼 → 黑白名单
+```
+
+**为什么必须拖顺序 / 删本地两条**：QX 的匹配顺序是 `[filter_local] > [filter_remote] > final`。那套配置的 `[filter_local]` 末尾有 `geoip, cn, direct` 和 `final, 黑白名单`，`final` 会把远程资源全部截断，除非把远程资源排到本地规则之前（QX 1.0.30+ 支持调整加载顺序），或者把这两条挪进远程资源末尾。
