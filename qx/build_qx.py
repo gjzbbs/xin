@@ -285,6 +285,8 @@ def main():
     ap.add_argument("--remote", action="store_true", help="自维护 list 也走网络")
     ap.add_argument("--servers", default=os.path.join(HERE, "servers.txt"))
     ap.add_argument("--no-cn-suffix", action="store_true", help="不额外加 DOMAIN-SUFFIX,cn 兜底")
+    ap.add_argument("--force-policy", default=None,
+                    help='把所有规则的策略名统一改成这一个（用于你 QX 里已有自己的策略组，如 --force-policy "Proxy"）')
     args = ap.parse_args()
 
     rulesets, groups = parse_ini(INI_PATH)
@@ -292,6 +294,7 @@ def main():
     os.makedirs(FILTER_DIR, exist_ok=True)
 
     segs = build_segments(rulesets)
+    FP = args.force_policy
     failed = []
     used, manifest, report = set(), [], []
     total_rules = 0
@@ -308,12 +311,12 @@ def main():
                 if key == "geoip|cn":
                     # .cn 域名直接命中，比等 DNS 解析出国内 IP 再走 GEOIP 更快更准
                     if not args.no_cn_suffix:
-                        lines.append("DOMAIN-SUFFIX,cn,%s" % policy)
-                    lines.append("GEOIP,CN,%s" % policy)
+                        lines.append("DOMAIN-SUFFIX,cn,%s" % (FP or policy))
+                    lines.append("GEOIP,CN,%s" % (FP or policy))
                     srcs.append("内置 GEOIP,CN")
                     continue
                 if key == "final":
-                    lines.append("FINAL,%s" % policy)
+                    lines.append("FINAL,%s" % (FP or policy))
                     srcs.append("内置 FINAL")
                     continue
                 continue
@@ -328,7 +331,7 @@ def main():
                 continue
             srcs.append(shown)
             for raw in text.splitlines():
-                q = to_qx(raw, policy, dropped)
+                q = to_qx(raw, FP or policy, dropped)
                 if q:
                     lines.append(q)
         # 去重保序
@@ -357,6 +360,9 @@ def main():
 
     # ---------------- policy 段
     pol, notes = build_policies(groups, servers)
+    if FP:
+        pol = ["# --force-policy 生效：全部规则指向 %s，本段可删（沿用你 QX 里已有的组）" % FP]
+        notes = ["所有规则的策略名已统一为 %s" % FP]
 
     # ---------------- conf
     fr = "\n".join(
@@ -413,11 +419,31 @@ server=119.29.29.29
     open(os.path.join(HERE, "QuantumultX.conf"), "w", encoding="utf-8", newline="\n").write(conf)
 
     # ---------------- report
+    # ---------------- 合并成单一分流资源（QX「资源→分流」一条搞定）
+    merged = []
+    for fname, _p, _n in manifest:
+        for raw in open(os.path.join(FILTER_DIR, fname), encoding="utf-8"):
+            t = raw.strip()
+            if t and not t.startswith("#"):
+                merged.append(t)
+    hdr = [
+        "# gjzbbs/xin 全量分流（ShellClash_Custom.ini 的 QuantumultX 版）",
+        "# %d 条规则，文件内顺序 = 匹配优先级（等于 ini 里 ruleset 的先后）" % len(merged),
+        "# 直接加到 QX「设置 → 资源 → 分流」，策略名必须与配置里 [policy] 段一致",
+        "",
+    ]
+    open(os.path.join(HERE, "QX-all.list"), "w", encoding="utf-8", newline="\n").write(
+        "\n".join(hdr + merged) + "\n")
+
+    # ---------------- 策略组单独一份，方便只拷这一段进现有配置
+    open(os.path.join(HERE, "QX-policy.txt"), "w", encoding="utf-8", newline="\n").write(
+        "# 拷进 QX 配置文件（原样覆盖或合并进已有 [policy] 段）\n[policy]\n" + "\n".join(pol) + "\n")
+
     rep = [
         "生成时间：%s" % time.strftime("%Y-%m-%d %H:%M:%S"),
         "规则总数：%d" % total_rules,
         "策略组数：%d（QX policy 行）" % len(pol),
-        "远程规则集：%d 个" % len(manifest),
+        "远程规则集：%d 个（分文件）／合并版 QX-all.list %d 条" % (len(manifest), len(merged)),
         "丢弃的不支持类型：%s" % (skipped_all or "无"),
         "下载失败的源：%s" % (failed or "无"),
         "",

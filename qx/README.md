@@ -9,9 +9,38 @@
 
 ---
 
-## 一、两种用法
+## 一、怎么用
 
-### A. 直接导入整份配置（最省事）
+### 0. 只加一条「分流资源」（QX 设置 → 资源 → 分流）
+
+```
+https://raw.githubusercontent.com/gjzbbs/xin/main/qx/QX-all.list
+```
+
+5133 条规则全在这一个文件里，**文件内顺序就是匹配优先级**（等于 ini 里 `ruleset=` 的先后），等价于下面 25 个分文件。tag 随便写（如 `xin`）。
+
+唯一的前提：你 QX 配置的 `[policy]` 段里要有同名策略组，否则规则里的 `📘 Meta` / `🚀 节点选择` 这些名字解析不到，规则会被忽略。
+把 [QX-policy.txt](QX-policy.txt) 整段拷进配置文件的 `[policy]` 位置即可（33 行，只含组不含量节点，节点仍来自你的订阅）。
+
+**别**再把 `GEOIP,CN` / `FINAL` 塞进 `[filter_local]` —— 这个文件末尾自带，QX 本地规则优先于远程资源，放本地会抢在所有分流之前。
+
+如果你 QX 里已经有一套自己的组（名字不叫 `📘 Meta` 这些），不想动配置，就统一压成一个组名重新生成：
+
+```bash
+python qx/build_qx.py --force-policy "你现有的组名"
+# 生成的 QX-all.list 里每条规则的策略都换成那个组名，policy 段可删
+```
+
+### 0b. 想分批更新 / 排错：用 25 个分文件
+
+按下表顺序逐个加到 QX 的「资源 → 分流」（**顺序不能乱，它就是优先级**）：见文末清单，地址前缀是
+`https://raw.githubusercontent.com/gjzbbs/xin/main/qx/filter/`。
+
+### 0c. 直接导入整份配置（不想手动拼）
+
+
+
+### 附：整份配置导入
 
 ```
 https://raw.githubusercontent.com/gjzbbs/xin/main/qx/QuantumultX.conf
@@ -22,7 +51,7 @@ QX → 设置 → 配置文件 → 点右上角「+」→ 填上面地址 → �
 
 > 导入会**覆盖**当前配置。已有自己的配置就先用方式 B。
 
-### B. 合并进你现有配置（推荐，不动你已有的节点/重写/任务）
+### 附：只拷两段进现有配置
 
 只需把这两段拷进你的 QX 配置文件：
 

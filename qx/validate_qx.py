@@ -150,7 +150,35 @@ def main():
         if ", tag=" not in line:
             warns.append("filter_remote 缺 tag：" + line)
 
-    print("规则集 %d 个，规则 %d 条，策略组 %d 个" % (len(files), total, len(groups)))
+    # ---- 合并版 QX-all.list
+    allp = os.path.join(HERE, "QX-all.list")
+    if os.path.exists(allp):
+        rows = [l.strip() for l in open(allp, encoding="utf-8")
+                if l.strip() and not l.startswith("#")]
+        if rows[-1].upper().startswith("FINAL,") is False:
+            errs.append("QX-all.list 最后一行不是 FINAL")
+        if not any(r.upper().startswith("FINAL,") for r in rows):
+            errs.append("QX-all.list 缺 FINAL")
+        gi = next((i for i, r in enumerate(rows) if r.upper().startswith("GEOIP,")), -1)
+        fi = next((i for i, r in enumerate(rows) if r.upper().startswith("FINAL,")), -1)
+        if gi < 0:
+            warns.append("QX-all.list 没有 GEOIP,CN")
+        elif fi >= 0 and gi > fi:
+            errs.append("QX-all.list 里 GEOIP 在 FINAL 之后")
+        for i, r in enumerate(rows, 1):
+            parts = [x.strip() for x in r.split(",")]
+            t = parts[0].upper()
+            if t == "FINAL":
+                continue
+            if len(parts) not in (3, 4):
+                errs.append("QX-all.list:%d 字段数=%d" % (i, len(parts)))
+                break
+            if parts[2] not in defined:
+                errs.append("QX-all.list:%d 策略未定义 %r" % (i, parts[2]))
+                break
+
+    print("规则集 %d 个 / %d 条，合并版 %d 条，策略组 %d 个"
+          % (len(files), total, len(rows) if os.path.exists(allp) else 0, len(groups)))
     print("未定义策略 %d 条，格式错误 %d 条，组结构错误 %d 条，提示 %d 条"
           % (sum(1 for e in errs if "策略未定义" in e),
              sum(1 for e in errs if "字段数" in e or "未知类型" in e or "第4段" in e),

@@ -1,0 +1,35 @@
+# 拷进 QX 配置文件（原样覆盖或合并进已有 [policy] 段）
+[policy]
+static=🚀 手动切换, jdzs-VLESS-CF, jdzs-HY2-direct, Home-KR, Home-JP, Home-KR-CF, Home-JP-CF, Home-US, Home-US-CF, Home-KR-SG, Home-JP-SG, HW-Direct-SG, HW-Direct-SG-CF, Home-KR-SG-CF, Home-JP-SG-CF, ASCS-VLESS-CF
+url-latency-benchmark=♻️ 自动选择, jdzs-VLESS-CF, jdzs-HY2-direct, Home-KR, Home-JP, Home-KR-CF, Home-JP-CF, Home-US, Home-US-CF, Home-KR-SG, Home-JP-SG, HW-Direct-SG, HW-Direct-SG-CF, Home-KR-SG-CF, Home-JP-SG-CF, ASCS-VLESS-CF, check-interval=300, tolerance=50
+static=🛑 广告拦截, DIRECT, REJECT
+static=🍃 应用净化, DIRECT, REJECT
+static=🎮 外服游戏, jdzs-VLESS-CF, jdzs-HY2-direct, Home-KR, Home-JP, Home-KR-CF, Home-JP-CF, Home-US, Home-US-CF, Home-KR-SG, Home-JP-SG, HW-Direct-SG, HW-Direct-SG-CF, Home-KR-SG-CF, Home-JP-SG-CF, ASCS-VLESS-CF
+static=🎮 游戏节点, 🚀 手动切换
+static=🎥 流媒体解锁, 🚀 手动切换
+url-latency-benchmark=📺 省流节点, 🚀 手动切换, check-interval=300, tolerance=50
+url-latency-benchmark=👍 高级节点, 🚀 手动切换, check-interval=300, tolerance=50
+url-latency-benchmark=🇭🇰 香港节点, 🚀 手动切换, check-interval=300, tolerance=50
+url-latency-benchmark=🇯🇵 日本节点, Home-JP, Home-JP-CF, Home-JP-SG, Home-JP-SG-CF, check-interval=300, tolerance=50
+url-latency-benchmark=🇰🇷 韩国节点, Home-KR, Home-KR-CF, Home-KR-SG, Home-KR-SG-CF, check-interval=300, tolerance=50
+url-latency-benchmark=🇺🇲 美国节点, Home-US, Home-US-CF, check-interval=300, tolerance=150
+url-latency-benchmark=🇨🇳 台湾节点, 🚀 手动切换, check-interval=300, tolerance=50
+url-latency-benchmark=🇸🇬 新加坡节点, Home-KR-SG, Home-JP-SG, HW-Direct-SG, HW-Direct-SG-CF, Home-KR-SG-CF, Home-JP-SG-CF, check-interval=300, tolerance=50
+static=🏠 家宽节点, Home-KR, Home-JP, Home-KR-CF, Home-JP-CF, Home-US, Home-US-CF, Home-KR-SG, Home-JP-SG, Home-KR-SG-CF, Home-JP-SG-CF
+static=🚀 节点选择, ♻️ 自动选择, 🏠 家宽节点, 📺 省流节点, 👍 高级节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇺🇲 美国节点, 🚀 手动切换, DIRECT
+static=📲 电报消息, 🚀 节点选择, ♻️ 自动选择, 📺 省流节点, 🇸🇬 新加坡节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇺🇲 美国节点, 🚀 手动切换, DIRECT
+static=📢 谷歌FCM, DIRECT, 🚀 节点选择, 🇺🇲 美国节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🚀 手动切换
+static=🎥 NETFLIX, 🎥 流媒体解锁, 👍 高级节点, 🇸🇬 新加坡节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇺🇲 美国节点, 🚀 节点选择
+static=🎥 DisneyP, 🎥 流媒体解锁, 👍 高级节点, 🇸🇬 新加坡节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇺🇲 美国节点, 🚀 节点选择
+static=🎥 YouTube, 📺 省流节点, 👍 高级节点, 🇸🇬 新加坡节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇺🇲 美国节点, 🚀 节点选择
+static=📺 哔哩海外, 🎯 全球直连, 🇨🇳 台湾节点, 🇭🇰 香港节点
+static=🌍 国外媒体, 🚀 节点选择, ♻️ 自动选择, 📺 省流节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇺🇲 美国节点, 🚀 手动切换, DIRECT
+static=🌏 国内媒体, DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🚀 手动切换
+static=🤖 人工智能, 🇺🇲 美国节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🚀 手动切换
+static=📘 Meta, 🚀 节点选择, ♻️ 自动选择, 🏠 家宽节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🇭🇰 香港节点, 🇸🇬 新加坡节点, 🚀 手动切换
+static=Ⓜ️ 微软服务, DIRECT, 🚀 节点选择, 🇺🇲 美国节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🚀 手动切换
+static=🍎 苹果服务, DIRECT, 🚀 节点选择, 🇺🇲 美国节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🚀 手动切换
+static=📺 巴哈姆特, 🇨🇳 台湾节点, 🚀 节点选择, 🚀 手动切换, DIRECT
+static=🎶 网易音乐, DIRECT, 🚀 节点选择, ♻️ 自动选择
+static=🎯 全球直连, DIRECT, 🚀 节点选择, ♻️ 自动选择
+static=🐟 漏网之鱼, 🚀 节点选择, ♻️ 自动选择, DIRECT, 📺 省流节点, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇸🇬 新加坡节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇺🇲 美国节点, 🚀 手动切换
