@@ -1,6 +1,6 @@
 # 策略：🎯 全球直连
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list; ChinaIpV6.list (按 --with-china-domain 跳过); https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list; ChinaIp.list (按 --with-china-domain 跳过); 内置 GEOIP,CN
-# 条数：614（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 13, '跨策略重复(前面已命中)': 32}）
+# 条数：607（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 13, 'url-regex (需 MITM，已分离到 QX-mitm-optional.list)': 7, '跨策略重复(前面已命中)': 32}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,13th.tech,🎯 全球直连
@@ -609,11 +609,4 @@ host-suffix,cmbchina.com,🎯 全球直连
 host-suffix,95516.com,🎯 全球直连
 host-suffix,smtp,🎯 全球直连
 host-keyword,aria2,🎯 全球直连
-url-regex,(Subject|HELO|SMTP),🎯 全球直连
-url-regex,(api|ps|sv|offnavi|newvector|ulog.imap|newloc)(.map|).(baidu|n.shifen).com,🎯 全球直连
-url-regex,(.+.|^)(360|so|qihoo|360safe|qhimg|360totalsecurity|yunpan).(cn|com),🎯 全球直连
-url-regex,(.+.)?(torrent|announce.php?passkey=|tracker|BitTorrent|bt_key|ed2k|find_node|get_peers|info_hash|magnet:|peer_id=|xunlei)(..+)?,🎯 全球直连
-url-regex,(.?)(xunlei|sandai|Thunder|XLLiveUD)(.),🎯 全球直连
-url-regex,(.+\.|^)(360|so)\.(cn|com),🎯 全球直连
-url-regex,assets\d+\.xboxlive\.(com|cn),🎯 全球直连
 geoip,cn,🎯 全球直连

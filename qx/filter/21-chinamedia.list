@@ -1,6 +1,6 @@
 # 策略：🌏 国内媒体
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list
-# 条数：34（去重后；不支持的类型已丢弃：{'跨策略重复(前面已命中)': 4}）
+# 条数：33（去重后；不支持的类型已丢弃：{'url-regex (需 MITM，已分离到 QX-mitm-optional.list)': 1, '跨策略重复(前面已命中)': 4}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host,apiintl.biliapi.net,🌏 国内媒体
@@ -31,7 +31,6 @@ ip-cidr,103.44.56.0/22,🌏 国内媒体,no-resolve
 ip-cidr,118.26.32.0/23,🌏 国内媒体,no-resolve
 ip-cidr,118.26.120.0/24,🌏 国内媒体,no-resolve
 ip-cidr,223.119.62.225/28,🌏 国内媒体,no-resolve
-url-regex,^https?:\/\/int[\w-\.]+iqiyi\.com,🌏 国内媒体
 host-suffix,api.mob.app.letv.com,🌏 国内媒体
 host-suffix,v.smtcdns.com,🌏 国内媒体
 host-suffix,vv.video.qq.com,🌏 国内媒体

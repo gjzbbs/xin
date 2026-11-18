@@ -1,5 +1,5 @@
 # gjzbbs/xin 全量分流（ShellClash_Custom.ini 的 QuantumultX 版）
-# 4915 条规则，文件内顺序 = 匹配优先级（等于 ini 里 ruleset 的先后）
+# 4905 条规则，文件内顺序 = 匹配优先级（等于 ini 里 ruleset 的先后）
 # 直接加到 QX「设置 → 资源 → 分流」，策略名必须与配置里 [policy] 段一致
 
 host-suffix,acl4.ssr,🎯 全球直连
@@ -2344,7 +2344,6 @@ ip-cidr,198.45.48.0/20,🎥 NETFLIX,no-resolve
 ip-cidr,203.75.84.0/24,🎥 NETFLIX,no-resolve
 ip-cidr,207.45.72.0/22,🎥 NETFLIX,no-resolve
 ip-cidr,208.75.76.0/22,🎥 NETFLIX,no-resolve
-user-agent,Argo*,🎥 NETFLIX
 host-suffix,flxvpn.net,🎥 NETFLIX
 host-suffix,netflix.ca,🎥 NETFLIX
 host-suffix,netflix.com.au,🎥 NETFLIX
@@ -3691,7 +3690,6 @@ host-suffix,amazonvideo.com,🌍 国外媒体
 host-suffix,media-amazon.com,🌍 国外媒体
 host-suffix,pv-cdn.net,🌍 国外媒体
 host-suffix,seattlespheres.com,🌍 国外媒体
-url-regex,^https?:\/\/www\.amazon\.com\/(Amazon-Video|gp\/video)\/,🌍 国外媒体
 host,gspe1-ssl.ls.apple.com,🌍 国外媒体
 host,np-edge.itunes.apple.com,🌍 国外媒体
 host,play-edge.itunes.apple.com,🌍 国外媒体
@@ -3916,7 +3914,6 @@ ip-cidr,103.44.56.0/22,🌏 国内媒体,no-resolve
 ip-cidr,118.26.32.0/23,🌏 国内媒体,no-resolve
 ip-cidr,118.26.120.0/24,🌏 国内媒体,no-resolve
 ip-cidr,223.119.62.225/28,🌏 国内媒体,no-resolve
-url-regex,^https?:\/\/int[\w-\.]+iqiyi\.com,🌏 国内媒体
 host-suffix,api.mob.app.letv.com,🌏 国内媒体
 host-suffix,v.smtcdns.com,🌏 国内媒体
 host-suffix,vv.video.qq.com,🌏 国内媒体
@@ -4908,12 +4905,5 @@ host-suffix,cmbchina.com,🎯 全球直连
 host-suffix,95516.com,🎯 全球直连
 host-suffix,smtp,🎯 全球直连
 host-keyword,aria2,🎯 全球直连
-url-regex,(Subject|HELO|SMTP),🎯 全球直连
-url-regex,(api|ps|sv|offnavi|newvector|ulog.imap|newloc)(.map|).(baidu|n.shifen).com,🎯 全球直连
-url-regex,(.+.|^)(360|so|qihoo|360safe|qhimg|360totalsecurity|yunpan).(cn|com),🎯 全球直连
-url-regex,(.+.)?(torrent|announce.php?passkey=|tracker|BitTorrent|bt_key|ed2k|find_node|get_peers|info_hash|magnet:|peer_id=|xunlei)(..+)?,🎯 全球直连
-url-regex,(.?)(xunlei|sandai|Thunder|XLLiveUD)(.),🎯 全球直连
-url-regex,(.+\.|^)(360|so)\.(cn|com),🎯 全球直连
-url-regex,assets\d+\.xboxlive\.(com|cn),🎯 全球直连
 geoip,cn,🎯 全球直连
 final,🐟 漏网之鱼

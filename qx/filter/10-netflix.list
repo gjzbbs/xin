@@ -1,6 +1,6 @@
 # 策略：🎥 NETFLIX
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list; https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Netflix.list
-# 条数：499（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 1, '跨策略重复(前面已命中)': 39}）
+# 条数：498（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 1, 'user-agent (需 MITM，已分离到 QX-mitm-optional.list)': 1, '跨策略重复(前面已命中)': 39}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-keyword,apiproxy-device-prod-nlb-,🎥 NETFLIX
@@ -43,7 +43,6 @@ ip-cidr,198.45.48.0/20,🎥 NETFLIX,no-resolve
 ip-cidr,203.75.84.0/24,🎥 NETFLIX,no-resolve
 ip-cidr,207.45.72.0/22,🎥 NETFLIX,no-resolve
 ip-cidr,208.75.76.0/22,🎥 NETFLIX,no-resolve
-user-agent,Argo*,🎥 NETFLIX
 host-suffix,flxvpn.net,🎥 NETFLIX
 host-suffix,netflix.ca,🎥 NETFLIX
 host-suffix,netflix.com.au,🎥 NETFLIX

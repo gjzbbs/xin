@@ -65,6 +65,12 @@ QX_TYPE_MAP = {
 }
 QX_TYPES = set(QX_TYPE_MAP)
 
+# 需要 MITM 才合法的类型：QX 在未配置 [mitm] hostname 时会把它们当成 Invalid Line，
+# 一条就能让整份远程分流资源加载失败。默认从主资源里摘出去，单独生成可选项。
+MITM_TYPES = {"url-regex", "user-agent"}
+MITM_ROWS = []
+WITH_MITM_RULES = False
+
 SLUGS = {
     "🎯 全球直连": "direct",
     "🛑 广告拦截": "adblock",
@@ -223,6 +229,11 @@ def to_qx(line, policy, skipped):
             return None
     if not value:
         return None
+    if qt in MITM_TYPES and not WITH_MITM_RULES:
+        MITM_ROWS.append("%s,%s,%s" % (qt, value, policy))
+        skipped[qt + " (需 MITM，已分离到 QX-mitm-optional.list)"] = \
+            skipped.get(qt + " (需 MITM，已分离到 QX-mitm-optional.list)", 0) + 1
+        return None
     no_resolve = any(x.lower() == "no-resolve" for x in extra)
     # 原文件里若已带策略（纯文本 QX 格式），丢弃，用规则集策略覆盖
     out = "%s,%s,%s" % (qt, value, policy)
@@ -330,14 +341,17 @@ def build_policies(groups, servers):
 
 # ---------------------------------------------------------------- main
 def main():
+    global WITH_MITM_RULES
     ap = argparse.ArgumentParser()
     ap.add_argument("--with-china-domain", action="store_true", help="包含 ChinaIp/ChinaIpV6（数千条 IP 规则，QX 会略慢）")
     ap.add_argument("--remote", action="store_true", help="自维护 list 也走网络")
     ap.add_argument("--servers", default=os.path.join(HERE, "servers.txt"))
     ap.add_argument("--no-cn-suffix", action="store_true", help="不额外加 DOMAIN-SUFFIX,cn 兜底")
+    ap.add_argument("--with-mitm-rules", action="store_true", help="把 url-regex / user-agent 也放进主资源（需先配 [mitm] hostname，否则 QX 报 Invalid Line）")
     ap.add_argument("--force-policy", default=None,
                     help='把所有规则的策略名统一改成这一个（用于你 QX 里已有自己的策略组，如 --force-policy "Proxy"）')
     args = ap.parse_args()
+    WITH_MITM_RULES = bool(args.with_mitm_rules)
 
     rulesets, groups = parse_ini(INI_PATH)
     servers = load_servers(args.servers)
@@ -489,6 +503,16 @@ server=119.29.29.29
     ]
     open(os.path.join(HERE, "QX-all.list"), "w", encoding="utf-8", newline="\n").write(
         "\n".join(hdr + merged) + "\n")
+
+    # ---------------- MITM 可选规则（默认不进主资源）
+    mitm_hdr = [
+        "# 需要 MITM 才生效的规则（url-regex / user-agent）",
+        "# 用法：先在配置 [mitm] 里写明 hostname，再把下面这些行追加进 [filter_local]",
+        "# 直接放进远程分流资源会被 QX 判 Invalid Line，导致整份资源加载失败",
+        "",
+    ]
+    open(os.path.join(HERE, "QX-mitm-optional.list"), "w", encoding="utf-8", newline="\n").write(
+        "\n".join(mitm_hdr + MITM_ROWS) + "\n")
 
     # ---------------- 策略组单独一份，方便只拷这一段进现有配置
     open(os.path.join(HERE, "QX-policy.txt"), "w", encoding="utf-8", newline="\n").write(

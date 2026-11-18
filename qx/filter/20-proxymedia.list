@@ -1,6 +1,6 @@
 # 策略：🌍 国外媒体
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
-# 条数：254（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 3, '跨策略重复(前面已命中)': 115}）
+# 条数：253（去重后；不支持的类型已丢弃：{'url-regex (需 MITM，已分离到 QX-mitm-optional.list)': 1, 'PROCESS-NAME': 3, '跨策略重复(前面已命中)': 115}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,edgedatg.com,🌍 国外媒体
@@ -60,7 +60,6 @@ host-suffix,amazonvideo.com,🌍 国外媒体
 host-suffix,media-amazon.com,🌍 国外媒体
 host-suffix,pv-cdn.net,🌍 国外媒体
 host-suffix,seattlespheres.com,🌍 国外媒体
-url-regex,^https?:\/\/www\.amazon\.com\/(Amazon-Video|gp\/video)\/,🌍 国外媒体
 host,gspe1-ssl.ls.apple.com,🌍 国外媒体
 host,np-edge.itunes.apple.com,🌍 国外媒体
 host,play-edge.itunes.apple.com,🌍 国外媒体
