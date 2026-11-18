@@ -3,16 +3,16 @@
 # 条数：13（去重后；不支持的类型已丢弃：无）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
-DOMAIN-SUFFIX,t.me,📲 电报消息
-DOMAIN-SUFFIX,tdesktop.com,📲 电报消息
-DOMAIN-SUFFIX,telegra.ph,📲 电报消息
-DOMAIN-SUFFIX,telegram.me,📲 电报消息
-DOMAIN-SUFFIX,telegram.org,📲 电报消息
-DOMAIN-SUFFIX,telesco.pe,📲 电报消息
-IP-CIDR,91.108.0.0/16,📲 电报消息,no-resolve
-IP-CIDR,95.161.64.0/20,📲 电报消息,no-resolve
-IP-CIDR,109.239.140.0/24,📲 电报消息,no-resolve
-IP-CIDR,149.154.160.0/20,📲 电报消息,no-resolve
-IP-CIDR6,2001:67c:4e8::/48,📲 电报消息,no-resolve
-IP-CIDR6,2001:b28:f23d::/48,📲 电报消息,no-resolve
-IP-CIDR6,2001:b28:f23f::/48,📲 电报消息,no-resolve
+host-suffix,t.me,📲 电报消息
+host-suffix,tdesktop.com,📲 电报消息
+host-suffix,telegra.ph,📲 电报消息
+host-suffix,telegram.me,📲 电报消息
+host-suffix,telegram.org,📲 电报消息
+host-suffix,telesco.pe,📲 电报消息
+ip-cidr,91.108.0.0/16,📲 电报消息,no-resolve
+ip-cidr,95.161.64.0/20,📲 电报消息,no-resolve
+ip-cidr,109.239.140.0/24,📲 电报消息,no-resolve
+ip-cidr,149.154.160.0/20,📲 电报消息,no-resolve
+ip6-cidr,2001:67c:4e8::/48,📲 电报消息,no-resolve
+ip6-cidr,2001:b28:f23d::/48,📲 电报消息,no-resolve
+ip6-cidr,2001:b28:f23f::/48,📲 电报消息,no-resolve

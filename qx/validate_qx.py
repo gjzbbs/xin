@@ -20,12 +20,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FILTER = os.path.join(HERE, "filter")
 CONF = os.path.join(HERE, "QuantumultX.conf")
 
+# 校验器内部会把类型 upper() 再比对，所以这里用大写（QX 实际写法是小写，见 build_qx.py）
 QX_TYPES = {
-    "DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD",
-    "IP-CIDR", "IP-CIDR6", "GEOIP", "IP-ASN",
+    "HOST", "HOST-SUFFIX", "HOST-KEYWORD", "HOST-WILDCARD",
+    "IP-CIDR", "IP6-CIDR", "GEOIP", "IP-ASN",
     "USER-AGENT", "URL-REGEX",
-    "HOST", "HOST-SUFFIX", "HOST-KEYWORD",
-    "SRC-IP-CIDR", "DST-PORT", "SRC-PORT", "FINAL",
+    "SRC-IP", "DST-PORT", "SRC-PORT", "FINAL",
 }
 errs, warns = [], []
 

@@ -1,12 +1,12 @@
-生成时间：2026-11-18 22:10:12
-规则总数：5133
+生成时间：2026-11-18 22:28:00
+规则总数：5132
 策略组数：33（QX policy 行）
-远程规则集：25 个（分文件）／合并版 QX-all.list 5133 条
-丢弃的不支持类型：{'PROCESS-NAME': 17}
+远程规则集：25 个（分文件）／合并版 QX-all.list 5132 条
+丢弃的不支持类型：{'回环/内网 IPv6': 1, 'PROCESS-NAME': 17}
 下载失败的源：无
 
 == 规则集 ==
-01-direct.list  🎯 全球直连             70 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list; https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list; custom-direct.list (本地)
+01-direct.list  🎯 全球直连             69 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list; https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list; custom-direct.list (本地)
 02-adblock.list  🛑 广告拦截            588 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
 03-appclean.list  🍃 应用净化           1010 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
 04-proxy.list  🚀 节点选择              1 条  <- custom-proxy.list (本地)

@@ -205,3 +205,25 @@ python qx/build_qx_sngxpro.py --meta-group Meta   # 你若新加了 Meta 组，�
 ```
 
 **为什么必须拖顺序 / 删本地两条**：QX 的匹配顺序是 `[filter_local] > [filter_remote] > final`。那套配置的 `[filter_local]` 末尾有 `geoip, cn, direct` 和 `final, 黑白名单`，`final` 会把远程资源全部截断，除非把远程资源排到本地规则之前（QX 1.0.30+ 支持调整加载顺序），或者把这两条挪进远程资源末尾。
+
+## 八、规则类型必须写成 QX 原生名（踩过）
+
+QX 只认这套类型，Clash 的写法会直接报 `Invalid Line`，**整条资源加载失败**：
+
+| Clash / ACL4SSR | QuantumultX |
+|---|---|
+| `DOMAIN` | `host` |
+| `DOMAIN-SUFFIX` | `host-suffix` |
+| `DOMAIN-KEYWORD` | `host-keyword` |
+| `IP-CIDR` | `ip-cidr` |
+| **`IP-CIDR6`** | **`ip6-cidr`** ← 最容易踩 |
+| `GEOIP` | `geoip` |
+| `IP-ASN` | `ip-asn` |
+| `USER-AGENT` | `user-agent` |
+| `URL-REGEX` | `url-regex` |
+| `SRC-IP-CIDR` | `src-ip` |
+| `DST-PORT` / `SRC-PORT` | `dst-port` / `src-port` |
+
+`build_qx.py` 里的 `QX_TYPE_MAP` 负责这层转换，同时在输出前做值清洗：
+去掉 `*.` 前缀与 `http://`、给裸 IP 补 `/32` `/128`、用 `ipaddress` 校验 CIDR、
+`GEOIP` 值强制两位大写国家码、丢弃 `::1/128` 这类回环 IPv6。

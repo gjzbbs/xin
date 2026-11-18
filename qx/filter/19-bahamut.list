@@ -3,8 +3,8 @@
 # 条数：5（去重后；不支持的类型已丢弃：无）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
-DOMAIN,bahamut.akamaized.net,📺 巴哈姆特
-DOMAIN,gamer-cds.cdn.hinet.net,📺 巴哈姆特
-DOMAIN,gamer2-cds.cdn.hinet.net,📺 巴哈姆特
-DOMAIN-SUFFIX,bahamut.com.tw,📺 巴哈姆特
-DOMAIN-SUFFIX,gamer.com.tw,📺 巴哈姆特
+host,bahamut.akamaized.net,📺 巴哈姆特
+host,gamer-cds.cdn.hinet.net,📺 巴哈姆特
+host,gamer2-cds.cdn.hinet.net,📺 巴哈姆特
+host-suffix,bahamut.com.tw,📺 巴哈姆特
+host-suffix,gamer.com.tw,📺 巴哈姆特

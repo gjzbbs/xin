@@ -3,9 +3,9 @@
 # 条数：6（去重后；不支持的类型已丢弃：无）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
-DOMAIN-SUFFIX,namecheap.com,♻️ 自动选择
-DOMAIN-SUFFIX,cloudflare.com,♻️ 自动选择
-DOMAIN-SUFFIX,trycloudflare.com,♻️ 自动选择
-DOMAIN-SUFFIX,ascsonoway.com,♻️ 自动选择
-DOMAIN-SUFFIX,atomgit.com,♻️ 自动选择
-DOMAIN-SUFFIX,linux.do,♻️ 自动选择
+host-suffix,namecheap.com,♻️ 自动选择
+host-suffix,cloudflare.com,♻️ 自动选择
+host-suffix,trycloudflare.com,♻️ 自动选择
+host-suffix,ascsonoway.com,♻️ 自动选择
+host-suffix,atomgit.com,♻️ 自动选择
+host-suffix,linux.do,♻️ 自动选择

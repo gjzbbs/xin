@@ -3,4 +3,4 @@
 # 条数：1（去重后；不支持的类型已丢弃：无）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
-DOMAIN-SUFFIX,bigmelook.com,📺 省流节点
+host-suffix,bigmelook.com,📺 省流节点

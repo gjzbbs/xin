@@ -21,6 +21,7 @@ build_qx.py — 把 ShellClash_Custom.ini（Clash/mihomo 版分流规格）转�
 """
 
 import argparse
+import ipaddress
 import hashlib
 import os
 import re
@@ -41,13 +42,28 @@ SELF_REPO = "raw.githubusercontent.com/gjzbbs/xin/main/"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
 
 # QX 支持的规则类型（其余跳过并计数）
-QX_TYPES = {
-    "DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD",
-    "IP-CIDR", "IP-CIDR6", "GEOIP", "IP-ASN",
-    "USER-AGENT", "URL-REGEX",
-    "HOST", "HOST-SUFFIX", "HOST-KEYWORD",
-    "SRC-IP-CIDR", "DST-PORT", "SRC-PORT",
+# Clash / ACL4SSR 类型 → QuantumultX 原生类型（QX 只认下面这套，写 IP-CIDR6 会报 Invalid Line）
+QX_TYPE_MAP = {
+    "DOMAIN": "host",
+    "DOMAIN-SUFFIX": "host-suffix",
+    "DOMAIN-KEYWORD": "host-keyword",
+    "DOMAIN-WILDCARD": "host-wildcard",
+    "HOST": "host",
+    "HOST-SUFFIX": "host-suffix",
+    "HOST-KEYWORD": "host-keyword",
+    "HOST-WILDCARD": "host-wildcard",
+    "IP-CIDR": "ip-cidr",
+    "IP-CIDR6": "ip6-cidr",
+    "IP6-CIDR": "ip6-cidr",
+    "GEOIP": "geoip",
+    "IP-ASN": "ip-asn",
+    "USER-AGENT": "user-agent",
+    "URL-REGEX": "url-regex",
+    "SRC-IP-CIDR": "src-ip",
+    "DST-PORT": "dst-port",
+    "SRC-PORT": "src-port",
 }
+QX_TYPES = set(QX_TYPE_MAP)
 
 SLUGS = {
     "🎯 全球直连": "direct",
@@ -173,10 +189,38 @@ def to_qx(line, policy, skipped):
     if t not in QX_TYPES:
         skipped[t] = skipped.get(t, 0) + 1
         return None
+    qt = QX_TYPE_MAP[t]
+    # 值清洗：去 *. 前缀、去协议与路径、给裸 IP 补掩码
+    value = value.strip().strip("'\"")
+    if qt in ("host", "host-suffix", "host-keyword", "host-wildcard"):
+        if value.startswith("*."):
+            value = value[2:]
+        if "://" in value:
+            value = value.split("://", 1)[1].split("/")[0]
+        value = value.rstrip(".")
+    elif qt in ("ip-cidr", "ip6-cidr"):
+        # 回环 / 链路本地 / ULA 这类地址 QX 内部本来就不经 filter，且 ::1/128 易被判非法
+        if value in ("::1/128", "::/128") and qt == "ip6-cidr":
+            skipped["回环/内网 IPv6"] = skipped.get("回环/内网 IPv6", 0) + 1
+            return None
+        try:
+            if "/" not in value:
+                value = value + ("/128" if qt == "ip6-cidr" else "/32")
+            ipaddress.ip_network(value, strict=False)
+        except ValueError:
+            skipped[t + " (坏值)"] = skipped.get(t + " (坏值)", 0) + 1
+            return None
+    elif qt == "geoip":
+        value = value.upper()
+        if not value.isalpha() or len(value) != 2:
+            skipped["GEOIP (坏值)"] = skipped.get("GEOIP (坏值)", 0) + 1
+            return None
+    if not value:
+        return None
     no_resolve = any(x.lower() == "no-resolve" for x in extra)
     # 原文件里若已带策略（纯文本 QX 格式），丢弃，用规则集策略覆盖
-    out = "%s,%s,%s" % (t, value, policy)
-    if no_resolve:
+    out = "%s,%s,%s" % (qt, value, policy)
+    if no_resolve and qt in ("ip-cidr", "ip6-cidr"):
         out += ",no-resolve"
     return out
 
@@ -311,12 +355,12 @@ def main():
                 if key == "geoip|cn":
                     # .cn 域名直接命中，比等 DNS 解析出国内 IP 再走 GEOIP 更快更准
                     if not args.no_cn_suffix:
-                        lines.append("DOMAIN-SUFFIX,cn,%s" % (FP or policy))
-                    lines.append("GEOIP,CN,%s" % (FP or policy))
+                        lines.append("host-suffix,cn,%s" % (FP or policy))
+                    lines.append("geoip,CN,%s" % (FP or policy))
                     srcs.append("内置 GEOIP,CN")
                     continue
                 if key == "final":
-                    lines.append("FINAL,%s" % (FP or policy))
+                    lines.append("final,%s" % (FP or policy))
                     srcs.append("内置 FINAL")
                     continue
                 continue
