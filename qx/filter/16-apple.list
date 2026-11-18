@@ -1,11 +1,10 @@
 # 策略：🍎 苹果服务
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
-# 条数：29（去重后；不支持的类型已丢弃：无）
+# 条数：28（去重后；不支持的类型已丢弃：{'跨策略重复(前面已命中)': 1}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host,apple.comscoreresearch.com,🍎 苹果服务
 host-suffix,aaplimg.com,🍎 苹果服务
-host-suffix,akadns.net,🍎 苹果服务
 host-suffix,apple-cloudkit.com,🍎 苹果服务
 host-suffix,apple-dns.net,🍎 苹果服务
 host-suffix,apple-mapkit.com,🍎 苹果服务

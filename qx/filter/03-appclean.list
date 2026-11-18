@@ -1,6 +1,6 @@
 # 策略：🍃 应用净化
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
-# 条数：1010（去重后；不支持的类型已丢弃：无）
+# 条数：1008（去重后；不支持的类型已丢弃：{'跨策略重复(前面已命中)': 8}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,a.youdao.com,🍃 应用净化
@@ -28,7 +28,6 @@ host-suffix,nc004x.corp.youdao.com,🍃 应用净化
 host-suffix,nc045x.corp.youdao.com,🍃 应用净化
 host-suffix,nex.corp.163.com,🍃 应用净化
 host-suffix,oimagea2.ydstatic.com,🍃 应用净化
-host-suffix,pagechoice.net,🍃 应用净化
 host-suffix,prom.gome.com.cn,🍃 应用净化
 host-suffix,qchannel0d.cn,🍃 应用净化
 host-suffix,qt002x.corp.youdao.com,🍃 应用净化
@@ -703,7 +702,6 @@ host-suffix,beap-bc.yahoo.com,🍃 应用净化
 host-suffix,clicks.beap.bc.yahoo.com,🍃 应用净化
 host-suffix,comet.yahoo.com,🍃 应用净化
 host-suffix,doubleplay-conf-yql.media.yahoo.com,🍃 应用净化
-host-suffix,flurry.com,🍃 应用净化
 host-suffix,gemini.yahoo.com,🍃 应用净化
 host-suffix,geo.yahoo.com,🍃 应用净化
 host-suffix,js-apac-ss.ysm.yahoo.com,🍃 应用净化

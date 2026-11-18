@@ -1,6 +1,6 @@
 # 策略：🎥 NETFLIX
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list; https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Netflix.list
-# 条数：499（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 1}）
+# 条数：499（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 1, '跨策略重复(前面已命中)': 39}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-keyword,apiproxy-device-prod-nlb-,🎥 NETFLIX

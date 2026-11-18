@@ -1,6 +1,6 @@
 # 策略：🎯 全球直连
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list; ChinaIpV6.list (按 --with-china-domain 跳过); https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list; ChinaIp.list (按 --with-china-domain 跳过); 内置 GEOIP,CN
-# 条数：644（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 13}）
+# 条数：614（去重后；不支持的类型已丢弃：{'PROCESS-NAME': 13, '跨策略重复(前面已命中)': 32}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,13th.tech,🎯 全球直连
@@ -92,12 +92,10 @@ host-suffix,ucweb.com,🎯 全球直连
 host-suffix,xiami.com,🎯 全球直连
 host-suffix,xiami.net,🎯 全球直连
 host-suffix,ykimg.com,🎯 全球直连
-host-suffix,youku.com,🎯 全球直连
 host-suffix,qwen.ai,🎯 全球直连
 host-suffix,baidu.com,🎯 全球直连
 host-suffix,baidubcr.com,🎯 全球直连
 host-suffix,baidupcs.com,🎯 全球直连
-host-suffix,baidustatic.com,🎯 全球直连
 host-suffix,bcebos.com,🎯 全球直连
 host-suffix,bdimg.com,🎯 全球直连
 host-suffix,bdstatic.com,🎯 全球直连
@@ -106,23 +104,8 @@ host-suffix,hao123.com,🎯 全球直连
 host-suffix,hao123img.com,🎯 全球直连
 host-suffix,jomodns.com,🎯 全球直连
 host-suffix,yunjiasu-cdn.net,🎯 全球直连
-host-suffix,acg.tv,🎯 全球直连
-host-suffix,acgvideo.com,🎯 全球直连
-host-suffix,b23.tv,🎯 全球直连
-host-suffix,bigfun.cn,🎯 全球直连
-host-suffix,bigfunapp.cn,🎯 全球直连
-host-suffix,biliapi.com,🎯 全球直连
-host-suffix,biliapi.net,🎯 全球直连
-host-suffix,bilibili.com,🎯 全球直连
 host-suffix,bilibili.co,🎯 全球直连
 host-suffix,biliintl.co,🎯 全球直连
-host-suffix,biligame.com,🎯 全球直连
-host-suffix,biligame.net,🎯 全球直连
-host-suffix,bilivideo.com,🎯 全球直连
-host-suffix,bilivideo.cn,🎯 全球直连
-host-suffix,hdslb.com,🎯 全球直连
-host-suffix,im9.com,🎯 全球直连
-host-suffix,smtcdns.net,🎯 全球直连
 host-suffix,amemv.com,🎯 全球直连
 host-suffix,bdxiguaimg.com,🎯 全球直连
 host-suffix,bdxiguastatic.com,🎯 全球直连
@@ -197,11 +180,6 @@ host-suffix,douyu.tv,🎯 全球直连
 host-suffix,douyucdn.cn,🎯 全球直连
 host-suffix,douyuscdn.com,🎯 全球直连
 host-suffix,douyutv.com,🎯 全球直连
-host-suffix,epicgames.com,🎯 全球直连
-host-suffix,epicgames.dev,🎯 全球直连
-host-suffix,helpshift.com,🎯 全球直连
-host-suffix,paragon.com,🎯 全球直连
-host-suffix,unrealengine.com,🎯 全球直连
 host-suffix,dbankcdn.com,🎯 全球直连
 host-suffix,hc-cdn.com,🎯 全球直连
 host-suffix,hicloud.com,🎯 全球直连
@@ -273,7 +251,6 @@ host-suffix,126.com,🎯 全球直连
 host-suffix,126.net,🎯 全球直连
 host-suffix,127.net,🎯 全球直连
 host-suffix,163.com,🎯 全球直连
-host-suffix,163yun.com,🎯 全球直连
 host-suffix,lofter.com,🎯 全球直连
 host-suffix,netease.com,🎯 全球直连
 host-suffix,ydstatic.com,🎯 全球直连
@@ -306,14 +283,8 @@ host-suffix,sohucs.com,🎯 全球直连
 host-suffix,sohuno.com,🎯 全球直连
 host-suffix,sohurdc.com,🎯 全球直连
 host-suffix,v-56.com,🎯 全球直连
-host-suffix,playstation.com,🎯 全球直连
-host-suffix,playstation.net,🎯 全球直连
-host-suffix,playstationnetwork.com,🎯 全球直连
 host-suffix,sony.com,🎯 全球直连
-host-suffix,sonyentertainmentnetwork.com,🎯 全球直连
 host-suffix,cm.steampowered.com,🎯 全球直连
-host-suffix,steamcontent.com,🎯 全球直连
-host-suffix,steamusercontent.com,🎯 全球直连
 host-suffix,steamchina.com,🎯 全球直连
 host,csgo.wmsj.cn,🎯 全球直连
 host,dota2.wmsj.cn,🎯 全球直连
@@ -604,7 +575,6 @@ host-suffix,weiphone.com,🎯 全球直连
 host-suffix,weiphone.net,🎯 全球直连
 host-suffix,womai.com,🎯 全球直连
 host-suffix,wscdns.com,🎯 全球直连
-host-suffix,xdrig.com,🎯 全球直连
 host-suffix,xhscdn.com,🎯 全球直连
 host-suffix,xiachufang.com,🎯 全球直连
 host-suffix,xiaohongshu.com,🎯 全球直连
@@ -646,4 +616,4 @@ url-regex,(.+.)?(torrent|announce.php?passkey=|tracker|BitTorrent|bt_key|ed2k|fi
 url-regex,(.?)(xunlei|sandai|Thunder|XLLiveUD)(.),🎯 全球直连
 url-regex,(.+\.|^)(360|so)\.(cn|com),🎯 全球直连
 url-regex,assets\d+\.xboxlive\.(com|cn),🎯 全球直连
-geoip,CN,🎯 全球直连
+geoip,cn,🎯 全球直连

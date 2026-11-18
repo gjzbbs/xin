@@ -227,3 +227,22 @@ QX 只认这套类型，Clash 的写法会直接报 `Invalid Line`，**整条资
 `build_qx.py` 里的 `QX_TYPE_MAP` 负责这层转换，同时在输出前做值清洗：
 去掉 `*.` 前缀与 `http://`、给裸 IP 补 `/32` `/128`、用 `ipaddress` 校验 CIDR、
 `GEOIP` 值强制两位大写国家码、丢弃 `::1/128` 这类回环 IPv6。
+
+## 九、按 QX 语义做的清洗（不只是改类型名）
+
+`QX_TYPE_MAP` 只解决「类型名」。真正让规则在 QX 里既合法又高效，还要这几层：
+
+| 处理 | 原因 | 效果 |
+|---|---|---|
+| 跨文件按 `(类型, 值)` 去重 | QX 按加载顺序首个匹配即停，同一域名在后一个策略段里**永远不会命中** | 5132 → 4915 条，去重后行为完全等价 |
+| 域名值统一小写 | QX 内部按小写比对，大写属于脏数据 | 11 条 |
+| 非 ASCII 域名转 punycode | QX 的 host 规则只吃 ASCII | `神奇宝贝.cn` → `xn--mts47c3w9b1qr.cn` |
+| `geoip` 国家码小写 | QX 官方 sample 与面板都用 `geoip, cn` | `geoip,CN` → `geoip,cn` |
+| `no-resolve` 只挂在 ip 类 | 挂在 host 类上属无意义字段 | 467 条 `ip-cidr`、209 条 `ip6-cidr` 全带 no-resolve，0 条漏挂 |
+| 丢弃 `::1/128` / `::/128` | 回环流量不走 filter，留着只增加一条无效规则 | -2 条 |
+
+## 十、QX 里本来就无效、但不会报错的两类规则
+
+- `url-regex`（9 条）与 `user-agent`（1 条）**必须配合 MITM** 才生效，且 `user-agent` 只对 HTTP 明文有效。
+  没有 `[mitm] hostname` 时它们只是不匹配，不会让资源加载失败。要用就把对应域名加进 `[mitm] hostname`。
+- 广告拦截那 1600 多条全是 `host-suffix` / `host-keyword`，**不需要 MITM** 也能拦。

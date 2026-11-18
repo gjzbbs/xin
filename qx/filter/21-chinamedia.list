@@ -1,19 +1,15 @@
 # 策略：🌏 国内媒体
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list
-# 条数：38（去重后；不支持的类型已丢弃：无）
+# 条数：34（去重后；不支持的类型已丢弃：{'跨策略重复(前面已命中)': 4}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host,apiintl.biliapi.net,🌏 国内媒体
-host,upos-hz-mirrorakam.akamaized.net,🌏 国内媒体
 host-suffix,acg.tv,🌏 国内媒体
-host-suffix,acgvideo.com,🌏 国内媒体
 host-suffix,b23.tv,🌏 国内媒体
 host-suffix,bigfun.cn,🌏 国内媒体
 host-suffix,bigfunapp.cn,🌏 国内媒体
 host-suffix,biliapi.com,🌏 国内媒体
 host-suffix,biliapi.net,🌏 国内媒体
-host-suffix,bilibili.com,🌏 国内媒体
-host-suffix,bilibili.tv,🌏 国内媒体
 host-suffix,biligame.com,🌏 国内媒体
 host-suffix,biligame.net,🌏 国内媒体
 host-suffix,bilivideo.cn,🌏 国内媒体

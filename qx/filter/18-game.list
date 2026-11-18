@@ -1,6 +1,6 @@
 # 策略：🎮 外服游戏
 # 来源：https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game.list
-# 条数：547（去重后；不支持的类型已丢弃：无）
+# 条数：545（去重后；不支持的类型已丢弃：{'跨策略重复(前面已命中)': 3}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,battle.net,🎮 外服游戏
@@ -352,9 +352,7 @@ host-suffix,pokemonultrasunmoon.com,🎮 外服游戏
 host-suffix,pokemonvgc.com,🎮 外服游戏
 host-suffix,pokemonwifi.net,🎮 外服游戏
 host-suffix,xn--mts47c3w9b1qr.cn,🎮 外服游戏
-host-suffix,神奇宝贝.cn,🎮 外服游戏
 host-suffix,xn--mts47c3w9b1qr.net,🎮 外服游戏
-host-suffix,神奇宝贝.net,🎮 外服游戏
 host-suffix,splatoon2tournament.com,🎮 外服游戏
 host-suffix,starfox.com,🎮 外服游戏
 host-suffix,drmario-world.com,🎮 外服游戏

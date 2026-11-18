@@ -197,7 +197,13 @@ def to_qx(line, policy, skipped):
             value = value[2:]
         if "://" in value:
             value = value.split("://", 1)[1].split("/")[0]
-        value = value.rstrip(".")
+        value = value.rstrip(".").lower()
+        if not value.isascii():
+            try:
+                value = value.encode("idna").decode("ascii")
+            except Exception:
+                skipped["非 ASCII 域名 (无法转 punycode)"] = skipped.get("非 ASCII 域名 (无法转 punycode)", 0) + 1
+                return None
     elif qt in ("ip-cidr", "ip6-cidr"):
         # 回环 / 链路本地 / ULA 这类地址 QX 内部本来就不经 filter，且 ::1/128 易被判非法
         if value in ("::1/128", "::/128") and qt == "ip6-cidr":
@@ -211,7 +217,7 @@ def to_qx(line, policy, skipped):
             skipped[t + " (坏值)"] = skipped.get(t + " (坏值)", 0) + 1
             return None
     elif qt == "geoip":
-        value = value.upper()
+        value = value.lower()
         if not value.isalpha() or len(value) != 2:
             skipped["GEOIP (坏值)"] = skipped.get("GEOIP (坏值)", 0) + 1
             return None
@@ -344,6 +350,7 @@ def main():
     total_rules = 0
     skipped_all = {}
 
+    GLOBAL_SEEN = set()
     for idx, (policy, specs) in enumerate(segs, 1):
         slug = slugify(policy, used)
         fname = "%02d-%s.list" % (idx, slug)
@@ -356,7 +363,7 @@ def main():
                     # .cn 域名直接命中，比等 DNS 解析出国内 IP 再走 GEOIP 更快更准
                     if not args.no_cn_suffix:
                         lines.append("host-suffix,cn,%s" % (FP or policy))
-                    lines.append("geoip,CN,%s" % (FP or policy))
+                    lines.append("geoip,cn,%s" % (FP or policy))
                     srcs.append("内置 GEOIP,CN")
                     continue
                 if key == "final":
@@ -378,12 +385,16 @@ def main():
                 q = to_qx(raw, FP or policy, dropped)
                 if q:
                     lines.append(q)
-        # 去重保序
-        seen, uniq = set(), []
+        # 去重保序（跨文件一起去重：QX 按加载顺序匹配，前面已命中的同一 (类型,值) 在后面永远不生效）
+        uniq = []
         for x in lines:
-            if x not in seen:
-                seen.add(x)
+            parts = x.split(",")
+            key = (parts[0], parts[1].lower()) if len(parts) > 1 else (x, "")
+            if key not in GLOBAL_SEEN:
+                GLOBAL_SEEN.add(key)
                 uniq.append(x)
+            elif parts[0] not in ("final",):
+                dropped["跨策略重复(前面已命中)"] = dropped.get("跨策略重复(前面已命中)", 0) + 1
         lines = uniq
 
         header = [
