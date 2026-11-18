@@ -1,0 +1,25 @@
+# 策略：🎥 DisneyP
+# 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DisneyPlus.list
+# 条数：20（去重后；不支持的类型已丢弃：无）
+# 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
+
+DOMAIN,cdn.registerdisney.go.com,🎥 DisneyP
+DOMAIN-SUFFIX,adobedtm.com,🎥 DisneyP
+DOMAIN-SUFFIX,bam.nr-data.net,🎥 DisneyP
+DOMAIN-SUFFIX,bamgrid.com,🎥 DisneyP
+DOMAIN-SUFFIX,braze.com,🎥 DisneyP
+DOMAIN-SUFFIX,cdn.optimizely.com,🎥 DisneyP
+DOMAIN-SUFFIX,cdn.registerdisney.go.com,🎥 DisneyP
+DOMAIN-SUFFIX,cws.conviva.com,🎥 DisneyP
+DOMAIN-SUFFIX,d9.flashtalking.com,🎥 DisneyP
+DOMAIN-SUFFIX,disney-plus.net,🎥 DisneyP
+DOMAIN-SUFFIX,disney-portal.my.onetrust.com,🎥 DisneyP
+DOMAIN-SUFFIX,disney.demdex.net,🎥 DisneyP
+DOMAIN-SUFFIX,disney.my.sentry.io,🎥 DisneyP
+DOMAIN-SUFFIX,disneyplus.bn5x.net,🎥 DisneyP
+DOMAIN-SUFFIX,disneyplus.com,🎥 DisneyP
+DOMAIN-SUFFIX,disneyplus.com.ssl.sc.omtrdc.net,🎥 DisneyP
+DOMAIN-SUFFIX,disneystreaming.com,🎥 DisneyP
+DOMAIN-SUFFIX,dssott.com,🎥 DisneyP
+DOMAIN-SUFFIX,execute-api.us-east-1.amazonaws.com,🎥 DisneyP
+DOMAIN-SUFFIX,js-agent.newrelic.com,🎥 DisneyP

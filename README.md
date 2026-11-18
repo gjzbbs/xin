@@ -17,6 +17,7 @@
 | `custom-auto.list` | 「自动选最快节点」清单（走 ♻️ 自动选择 组，如 cloudflare / namecheap / atomgit） | 想加不挑线路的站点时动 |
 | `meta.list` | Meta 系站点清单（Facebook / Instagram / WhatsApp / Threads，走 📘 Meta 组） | 想加 Meta 系域名时动 |
 | `ShellClash_Full_Block.ini` | 旧母版，保留备查 | 不动 |
+| `qx/` | **QuantumultX（iOS）版**：同一份 ini 自动生成 QX 配置与规则集，含 5133 条规则 / 33 组 | 改了 ini 或 .list 后重跑 `python qx/build_qx.py` |
 
 ---
 
@@ -278,3 +279,20 @@ curl -s "https://gh-proxy.com/https://raw.githubusercontent.com/gjzbbs/xin/main/
 
 改完让路由器生效：ShellCrash 菜单 `7 更新配置文件`，或命令行
 `cd /tmp/iktmp/plugins/shellcrash/bin && sh task/task.sh hotupdate`（热重载，不断网）。
+
+---
+
+## 九、QuantumultX（iOS）
+
+同一份 `ShellClash_Custom.ini` 已经自动转成 QX 可用的配置与规则集，放在 [`qx/`](qx/)，说明见 [qx/README.md](qx/README.md)。
+
+```bash
+python qx/build_qx.py      # ini + .list  →  qx/QuantumultX.conf + qx/filter/*.list
+python qx/validate_qx.py   # 自检：策略名/字段数/GEOIP 与 FINAL 位置/组引用环
+```
+
+QX 直接引用这两段即可（`[policy]` 33 行 + `[filter_remote]` 25 行），规则条数 5133，
+`📘 Meta` 组（含 muse.ai）与 Clash 侧完全一致。
+
+**注意**：QX 的 `[filter_local]` 优先于所有远程规则集，所以 `GEOIP,CN` 与 `FINAL`
+放在最后一个远程文件 `qx/filter/25-final.list` 里，不要写进本地段。

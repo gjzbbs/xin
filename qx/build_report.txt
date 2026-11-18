@@ -1,0 +1,50 @@
+生成时间：2026-11-18 21:56:19
+规则总数：5133
+策略组数：33（QX policy 行）
+远程规则集：25 个
+丢弃的不支持类型：{'PROCESS-NAME': 17}
+下载失败的源：无
+
+== 规则集 ==
+01-direct.list  🎯 全球直连             70 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list; https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list; custom-direct.list (本地)
+02-adblock.list  🛑 广告拦截            588 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
+03-appclean.list  🍃 应用净化           1010 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
+04-proxy.list  🚀 节点选择              1 条  <- custom-proxy.list (本地)
+05-meta.list  📘 Meta            556 条  <- meta.list (本地)
+06-auto.list  ♻️ 自动选择             6 条  <- custom-auto.list (本地)
+07-saver.list  📺 省流节点              1 条  <- custom-saver.list (本地)
+08-fcm.list  📢 谷歌FCM            44 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
+09-direct-2.list  🎯 全球直连             29 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
+10-netflix.list  🎥 NETFLIX         499 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list; https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Netflix.list
+11-disney.list  🎥 DisneyP          20 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DisneyPlus.list
+12-youtube.list  🎥 YouTube          14 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+13-bilibili.list  📺 哔哩海外             21 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list
+14-ai.list  🤖 人工智能            106 条  <- custom-ai.list (本地)
+15-microsoft.list  Ⓜ️ 微软服务            79 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+16-apple.list  🍎 苹果服务             29 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+17-telegram.list  📲 电报消息             13 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+18-game.list  🎮 外服游戏            547 条  <- https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game.list
+19-bahamut.list  📺 巴哈姆特              5 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list
+20-proxymedia.list  🌍 国外媒体            354 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+21-chinamedia.list  🌏 国内媒体             38 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list
+22-netease.list  🎶 网易音乐             37 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list
+23-proxy-2.list  🚀 节点选择            421 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
+24-direct-3.list  🎯 全球直连            644 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list; ChinaIpV6.list (按 --with-china-domain 跳过); https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list; ChinaIp.list (按 --with-china-domain 跳过); 内置 GEOIP,CN
+25-final.list  🐟 漏网之鱼              1 条  <- 内置 FINAL
+
+== 策略组提示 ==
+♻️ 自动选择 原测速地址 http://www.gstatic.com/generate_204 在 QX 无法按组指定，改用全局 server_check_url
+🎮 游戏节点 在订阅里没有匹配节点，兜底到 🚀 手动切换（可在 QX 里手动选具体节点）
+🎥 流媒体解锁 在订阅里没有匹配节点，兜底到 🚀 手动切换（可在 QX 里手动选具体节点）
+📺 省流节点 在订阅里没有匹配节点，兜底到 🚀 手动切换（可在 QX 里手动选具体节点）
+📺 省流节点 原测速地址 https://look.bigmelook.com 在 QX 无法按组指定，改用全局 server_check_url
+👍 高级节点 在订阅里没有匹配节点，兜底到 🚀 手动切换（可在 QX 里手动选具体节点）
+👍 高级节点 原测速地址 http://www.gstatic.com/generate_204 在 QX 无法按组指定，改用全局 server_check_url
+🇭🇰 香港节点 在订阅里没有匹配节点，兜底到 🚀 手动切换（可在 QX 里手动选具体节点）
+🇭🇰 香港节点 原测速地址 http://www.gstatic.com/generate_204 在 QX 无法按组指定，改用全局 server_check_url
+🇯🇵 日本节点 原测速地址 http://www.gstatic.com/generate_204 在 QX 无法按组指定，改用全局 server_check_url
+🇰🇷 韩国节点 原测速地址 http://www.gstatic.com/generate_204 在 QX 无法按组指定，改用全局 server_check_url
+🇺🇲 美国节点 原测速地址 http://www.gstatic.com/generate_204 在 QX 无法按组指定，改用全局 server_check_url
+🇨🇳 台湾节点 在订阅里没有匹配节点，兜底到 🚀 手动切换（可在 QX 里手动选具体节点）
+🇨🇳 台湾节点 原测速地址 http://www.gstatic.com/generate_204 在 QX 无法按组指定，改用全局 server_check_url
+🇸🇬 新加坡节点 原测速地址 http://www.gstatic.com/generate_204 在 QX 无法按组指定，改用全局 server_check_url

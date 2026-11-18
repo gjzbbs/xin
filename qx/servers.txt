@@ -1,0 +1,18 @@
+# QuantumultX 端实际显示的节点名（一行一个，用来给策略组做地区筛选）。
+# 来源：自建订阅里各节点的名字（QX 面板上显示的那个），不是订阅地址。
+# 换订阅或改名后：更新本文件 → 重跑 python qx/build_qx.py → push。
+jdzs-VLESS-CF
+jdzs-HY2-direct
+Home-KR
+Home-JP
+Home-KR-CF
+Home-JP-CF
+Home-US
+Home-US-CF
+Home-KR-SG
+Home-JP-SG
+HW-Direct-SG
+HW-Direct-SG-CF
+Home-KR-SG-CF
+Home-JP-SG-CF
+ASCS-VLESS-CF

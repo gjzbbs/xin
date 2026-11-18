@@ -1,0 +1,19 @@
+# 策略：🎥 YouTube
+# 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+# 条数：14（去重后；不支持的类型已丢弃：无）
+# 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
+
+DOMAIN-KEYWORD,youtube,🎥 YouTube
+DOMAIN,youtubei.googleapis.com,🎥 YouTube
+DOMAIN,yt3.ggpht.com,🎥 YouTube
+DOMAIN-SUFFIX,googlevideo.com,🎥 YouTube
+DOMAIN-SUFFIX,gvt2.com,🎥 YouTube
+DOMAIN-SUFFIX,withyoutube.com,🎥 YouTube
+DOMAIN-SUFFIX,youtu.be,🎥 YouTube
+DOMAIN-SUFFIX,youtube-nocookie.com,🎥 YouTube
+DOMAIN-SUFFIX,youtube.com,🎥 YouTube
+DOMAIN-SUFFIX,youtubeeducation.com,🎥 YouTube
+DOMAIN-SUFFIX,youtubegaming.com,🎥 YouTube
+DOMAIN-SUFFIX,youtubekids.com,🎥 YouTube
+DOMAIN-SUFFIX,yt.be,🎥 YouTube
+DOMAIN-SUFFIX,ytimg.com,🎥 YouTube
