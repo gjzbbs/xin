@@ -241,8 +241,81 @@ QX 只认这套类型，Clash 的写法会直接报 `Invalid Line`，**整条资
 | `no-resolve` 只挂在 ip 类 | 挂在 host 类上属无意义字段 | 467 条 `ip-cidr`、209 条 `ip6-cidr` 全带 no-resolve，0 条漏挂 |
 | 丢弃 `::1/128` / `::/128` | 回环流量不走 filter，留着只增加一条无效规则 | -2 条 |
 
-## 十、QX 里本来就无效、但不会报错的两类规则
+## 十一、需要 MITM 的规则（已单独分离）
 
-- `url-regex`（9 条）与 `user-agent`（1 条）**必须配合 MITM** 才生效，且 `user-agent` 只对 HTTP 明文有效。
-  没有 `[mitm] hostname` 时它们只是不匹配，不会让资源加载失败。要用就把对应域名加进 `[mitm] hostname`。
+`url-regex` 与 `user-agent` **必须配合 MITM** 才生效，且 `user-agent` 只对 HTTP 明文有效。
+更严重的是：**没有 `[mitm] hostname` 时 QX 会把这两类行判成 `Invalid Line`，
+一条就能让整份远程分流资源加载失败**（踩过：`Invalid Line url-regex,^https?:\/\/www\.amazon\.com\/...`）。
+
+所以它们已从主资源里全部摘出，单独放在 **`qx/QX-mitm-optional.list`**（10 条）。
+要用：先在 `[mitm] hostname` 写明对应域名，再把这几行手动贴进 `[filter_local]`。
 - 广告拦截那 1600 多条全是 `host-suffix` / `host-keyword`，**不需要 MITM** 也能拦。
+
+---
+
+## 十、AI（人工智能）分流
+
+母版里 AI 域名走 `🤖 人工智能` 组（106 条）。QX 这边给了两条路，按习惯选一条：
+
+### A. 一条资源搞定（推荐）
+
+全量资源换成 **`QX-sngxpro-all-Meta-AI.list`**（4907 条），其中 107 条 AI 域名落 `AI` 组、
+557 条 Meta 域名落 `Meta` 组，其余照旧。无需再加第二条资源，也就没有顺序问题。
+
+```
+https://raw.githubusercontent.com/gjzbbs/xin/main/qx/QX-sngxpro-all-Meta-AI.list?v=5
+```
+
+配置文件 `[policy]` 里要有这两个组：
+
+```
+static=Meta, 美国, 日本, 新加坡, 香港, 延迟最低, proxy
+static=AI, 美国, 日本, 新加坡, 延迟最低, 全球加速
+```
+
+### B. 只加一条 AI 资源
+
+**`QX-ai.list`**（107 条，纯 AI 域名，`host` / `host-suffix` / `host-keyword` 三种类型，
+不带 geoip / final）：
+
+```
+https://raw.githubusercontent.com/gjzbbs/xin/main/qx/QX-ai.list
+```
+
+⚠️ 它**必须排在主分流资源之前**。QX 首命中即停，主资源里 `host-suffix,openai.com,全球加速`
+排在前面的话，这条资源里同名的 107 条永远不会被命中。QX 1.0.30+ 可在「资源 → 分流」
+列表里拖动排序。
+
+同内容的映射版还有 `QX-sngxpro-ai-Meta-AI.list`，两条内容逐字节一致。
+
+### 顺带修正的母版问题
+
+`custom-ai.list` 原来把一批**通用入口**放进了 AI 组，等于把搜索、云盘、登录、笔记
+全推到 AI 线路上。这次清掉 10 条：
+
+| 域名 | 为什么清 |
+|---|---|
+| `www.google.com` | Google 搜索，不是 AI |
+| `apis.google.com` | Google 全线 API |
+| `accounts.google.com` | Google 账号登录 |
+| `fb.okta.com` | Facebook 登录 |
+| `accountscenter.com` | Meta 账号中心（已在 meta.list） |
+| `metamask.com` | 加密钱包，母版误入 |
+| `notion.so` / `notion.site` | 通用笔记（Notion AI 只是其中一个功能） |
+| `siliconflow.cn` | 国内站，走代理反而慢 |
+| `museai.com` | 与 `muse.ai` 同源 → 让给 `📘 Meta`（`meta.list` 已补） |
+
+补了 11 条母版缺的：`claude.com`、`notebooklm.google.com`、`labs.google`、`v0.dev`、
+`v0.app`、`bolt.new`、`lovable.dev`、`civitai.com`、`openart.ai`、`krea.ai`、`openai.azure.com`。
+
+改完 `custom-ai.list` 是 107 条（原 106 − 10 + 11）。ShellCrash 那边下次热更新同步后
+同样生效；`museai.com` 会从 AI 组转到 Meta 组，这正是最初「muse 走 Meta」的要求。
+
+### 生成器
+
+```bash
+python qx/build_qx_ai.py                        # 生成 qx/QX-ai.list，策略名 AI
+python qx/build_qx_ai.py --group 人工智能        # 换组名
+python qx/build_qx_ai.py --with-wide            # 保留那 9 个宽泛域名
+python qx/build_qx_sngxpro.py --meta-group Meta --ai-group AI   # 生成全量映射版
+```
