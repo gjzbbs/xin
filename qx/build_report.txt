@@ -1,7 +1,7 @@
-生成时间：2026-11-19 11:20:50
-规则总数：4906
+生成时间：2026-11-19 11:35:33
+规则总数：4911
 策略组数：33（QX policy 行）
-远程规则集：24 个（分文件）／合并版 QX-all.list 4906 条
+远程规则集：24 个（分文件）／合并版 QX-all.list 4911 条
 丢弃的不支持类型：{'回环/内网 IPv6': 1, '跨策略重复(前面已命中)': 289, 'PROCESS-NAME': 17, 'user-agent (需 MITM，已分离到 QX-mitm-optional.list)': 1, 'url-regex (需 MITM，已分离到 QX-mitm-optional.list)': 9}
 下载失败的源：无
 
@@ -19,7 +19,7 @@
 11-disney.list  🎥 DisneyP          20 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DisneyPlus.list
 12-youtube.list  🎥 YouTube          14 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
 13-bilibili.list  📺 哔哩海外             21 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list
-14-ai.list  🤖 人工智能            107 条  <- custom-ai.list (本地)
+14-ai.list  🤖 人工智能            112 条  <- custom-ai.list (本地)
 15-microsoft.list  Ⓜ️ 微软服务            79 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
 16-apple.list  🍎 苹果服务             28 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
 17-telegram.list  📲 电报消息             13 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list

@@ -119,6 +119,12 @@ DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
 DOMAIN,alkalicore-pa.clients6.google.com
 DOMAIN,alkalimakersuite-pa.clients6.google.com
 DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com
+# Gemini 网页核心长连接 / 媒体 / Vertex（缺任一条都可能被判「地区不可用」）
+DOMAIN-SUFFIX,content-push.googleapis.com
+DOMAIN-SUFFIX,play.googleapis.com
+DOMAIN-SUFFIX,aiplatform.googleapis.com
+DOMAIN-SUFFIX,cloudcode-pa.googleapis.com
+DOMAIN-SUFFIX,daily-cloudcode-pa.googleapis.com
 # 登录与鉴权（必须走代理，否则地区校验会绕过）
 DOMAIN,signaler-pa.clients6.google.com
 # 关键词兜底

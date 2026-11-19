@@ -1,5 +1,5 @@
 # gjzbbs/xin · AI / 人工智能 分流清单（QuantumultX 原生格式）
-# 共 107 条，策略统一为 AI
+# 共 112 条，策略统一为 AI
 # 源：custom-ai.list（Clash 格式）+ 补齐的常用 AI 服务，已转 QX 类型名
 #
 # 用法：QX → 设置 → 资源 → 分流 → + 粘贴下面这行
@@ -92,6 +92,11 @@ host-suffix,proactivebackend-pa.googleapis.com,AI
 host,alkalicore-pa.clients6.google.com,AI
 host,alkalimakersuite-pa.clients6.google.com,AI
 host,webchannel-alkalimakersuite-pa.clients6.google.com,AI
+host-suffix,content-push.googleapis.com,AI
+host-suffix,play.googleapis.com,AI
+host-suffix,aiplatform.googleapis.com,AI
+host-suffix,cloudcode-pa.googleapis.com,AI
+host-suffix,daily-cloudcode-pa.googleapis.com,AI
 host,signaler-pa.clients6.google.com,AI
 host-keyword,gemini,AI
 host-keyword,generativelanguage,AI

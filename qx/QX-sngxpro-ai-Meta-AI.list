@@ -1,5 +1,5 @@
 # gjzbbs/xin · AI / 人工智能 系（OpenAI / Claude / Gemini / Grok / 本地推理工具 等）
-# 107 条，策略统一为 AI
+# 112 条，策略统一为 AI
 # 用法：加到 QX「设置 → 资源 → 分流」，并拖到主分流资源之前（否则主资源里的同名域名先命中）
 
 host-suffix,openai.com,AI
@@ -85,6 +85,11 @@ host-suffix,proactivebackend-pa.googleapis.com,AI
 host,alkalicore-pa.clients6.google.com,AI
 host,alkalimakersuite-pa.clients6.google.com,AI
 host,webchannel-alkalimakersuite-pa.clients6.google.com,AI
+host-suffix,content-push.googleapis.com,AI
+host-suffix,play.googleapis.com,AI
+host-suffix,aiplatform.googleapis.com,AI
+host-suffix,cloudcode-pa.googleapis.com,AI
+host-suffix,daily-cloudcode-pa.googleapis.com,AI
 host,signaler-pa.clients6.google.com,AI
 host-keyword,gemini,AI
 host-keyword,generativelanguage,AI

@@ -1,6 +1,6 @@
 # 策略：🤖 人工智能
 # 来源：custom-ai.list (本地)
-# 条数：107（去重后；不支持的类型已丢弃：无）
+# 条数：112（去重后；不支持的类型已丢弃：无）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,openai.com,🤖 人工智能
@@ -86,6 +86,11 @@ host-suffix,proactivebackend-pa.googleapis.com,🤖 人工智能
 host,alkalicore-pa.clients6.google.com,🤖 人工智能
 host,alkalimakersuite-pa.clients6.google.com,🤖 人工智能
 host,webchannel-alkalimakersuite-pa.clients6.google.com,🤖 人工智能
+host-suffix,content-push.googleapis.com,🤖 人工智能
+host-suffix,play.googleapis.com,🤖 人工智能
+host-suffix,aiplatform.googleapis.com,🤖 人工智能
+host-suffix,cloudcode-pa.googleapis.com,🤖 人工智能
+host-suffix,daily-cloudcode-pa.googleapis.com,🤖 人工智能
 host,signaler-pa.clients6.google.com,🤖 人工智能
 host-keyword,gemini,🤖 人工智能
 host-keyword,generativelanguage,🤖 人工智能

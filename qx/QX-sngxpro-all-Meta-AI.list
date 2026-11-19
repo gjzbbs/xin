@@ -1,5 +1,5 @@
 # gjzbbs/xin 全量分流 · 少年歌行PRO 组名版
-# 4906 条，文件内顺序 = 匹配优先级；末尾自带 geoip,cn,direct 与 final,黑白名单
+# 4911 条，文件内顺序 = 匹配优先级；末尾自带 geoip,cn,direct 与 final,黑白名单
 # 用法：加到 QX「设置 → 资源 → 分流」，并把配置文件 [filter_local] 里的
 #       geoip, cn, direct 与 final, 黑白名单 两条删掉（本文件已含）
 
@@ -2942,6 +2942,11 @@ host-suffix,proactivebackend-pa.googleapis.com,AI
 host,alkalicore-pa.clients6.google.com,AI
 host,alkalimakersuite-pa.clients6.google.com,AI
 host,webchannel-alkalimakersuite-pa.clients6.google.com,AI
+host-suffix,content-push.googleapis.com,AI
+host-suffix,play.googleapis.com,AI
+host-suffix,aiplatform.googleapis.com,AI
+host-suffix,cloudcode-pa.googleapis.com,AI
+host-suffix,daily-cloudcode-pa.googleapis.com,AI
 host,signaler-pa.clients6.google.com,AI
 host-keyword,gemini,AI
 host-keyword,generativelanguage,AI

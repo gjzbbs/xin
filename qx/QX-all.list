@@ -1,5 +1,5 @@
 # gjzbbs/xin 全量分流（ShellClash_Custom.ini 的 QuantumultX 版）
-# 4906 条规则，文件内顺序 = 匹配优先级（等于 ini 里 ruleset 的先后）
+# 4911 条规则，文件内顺序 = 匹配优先级（等于 ini 里 ruleset 的先后）
 # 直接加到 QX「设置 → 资源 → 分流」，策略名必须与配置里 [policy] 段一致
 
 host-suffix,acl4.ssr,🎯 全球直连
@@ -2941,6 +2941,11 @@ host-suffix,proactivebackend-pa.googleapis.com,🤖 人工智能
 host,alkalicore-pa.clients6.google.com,🤖 人工智能
 host,alkalimakersuite-pa.clients6.google.com,🤖 人工智能
 host,webchannel-alkalimakersuite-pa.clients6.google.com,🤖 人工智能
+host-suffix,content-push.googleapis.com,🤖 人工智能
+host-suffix,play.googleapis.com,🤖 人工智能
+host-suffix,aiplatform.googleapis.com,🤖 人工智能
+host-suffix,cloudcode-pa.googleapis.com,🤖 人工智能
+host-suffix,daily-cloudcode-pa.googleapis.com,🤖 人工智能
 host,signaler-pa.clients6.google.com,🤖 人工智能
 host-keyword,gemini,🤖 人工智能
 host-keyword,generativelanguage,🤖 人工智能
