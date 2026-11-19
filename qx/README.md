@@ -241,18 +241,6 @@ QX 只认这套类型，Clash 的写法会直接报 `Invalid Line`，**整条资
 | `no-resolve` 只挂在 ip 类 | 挂在 host 类上属无意义字段 | 467 条 `ip-cidr`、209 条 `ip6-cidr` 全带 no-resolve，0 条漏挂 |
 | 丢弃 `::1/128` / `::/128` | 回环流量不走 filter，留着只增加一条无效规则 | -2 条 |
 
-## 十一、需要 MITM 的规则（已单独分离）
-
-`url-regex` 与 `user-agent` **必须配合 MITM** 才生效，且 `user-agent` 只对 HTTP 明文有效。
-更严重的是：**没有 `[mitm] hostname` 时 QX 会把这两类行判成 `Invalid Line`，
-一条就能让整份远程分流资源加载失败**（踩过：`Invalid Line url-regex,^https?:\/\/www\.amazon\.com\/...`）。
-
-所以它们已从主资源里全部摘出，单独放在 **`qx/QX-mitm-optional.list`**（10 条）。
-要用：先在 `[mitm] hostname` 写明对应域名，再把这几行手动贴进 `[filter_local]`。
-- 广告拦截那 1600 多条全是 `host-suffix` / `host-keyword`，**不需要 MITM** 也能拦。
-
----
-
 ## 十、AI（人工智能）分流
 
 母版里 AI 域名走 `🤖 人工智能` 组（106 条）。QX 这边给了两条路，按习惯选一条：
@@ -319,3 +307,17 @@ python qx/build_qx_ai.py --group 人工智能        # 换组名
 python qx/build_qx_ai.py --with-wide            # 保留那 9 个宽泛域名
 python qx/build_qx_sngxpro.py --meta-group Meta --ai-group AI   # 生成全量映射版
 ```
+
+---
+
+## 十一、需要 MITM 的规则（已单独分离）
+
+`url-regex` 与 `user-agent` **必须配合 MITM** 才生效，且 `user-agent` 只对 HTTP 明文有效。
+更严重的是：**没有 `[mitm] hostname` 时 QX 会把这两类行判成 `Invalid Line`，
+一条就能让整份远程分流资源加载失败**（踩过：`Invalid Line url-regex,^https?:\/\/www\.amazon\.com\/...`）。
+
+所以它们已从主资源里全部摘出，单独放在 **`qx/QX-mitm-optional.list`**（10 条）。
+要用：先在 `[mitm] hostname` 写明对应域名，再把这几行手动贴进 `[filter_local]`。
+- 广告拦截那 1600 多条全是 `host-suffix` / `host-keyword`，**不需要 MITM** 也能拦。
+
+---
