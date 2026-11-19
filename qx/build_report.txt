@@ -1,7 +1,7 @@
-生成时间：2026-11-18 22:53:33
-规则总数：4905
+生成时间：2026-11-19 08:03:51
+规则总数：4907
 策略组数：33（QX policy 行）
-远程规则集：25 个（分文件）／合并版 QX-all.list 4905 条
+远程规则集：25 个（分文件）／合并版 QX-all.list 4907 条
 丢弃的不支持类型：{'回环/内网 IPv6': 1, '跨策略重复(前面已命中)': 289, 'PROCESS-NAME': 17, 'user-agent (需 MITM，已分离到 QX-mitm-optional.list)': 1, 'url-regex (需 MITM，已分离到 QX-mitm-optional.list)': 9}
 下载失败的源：无
 
@@ -10,7 +10,7 @@
 02-adblock.list  🛑 广告拦截            588 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
 03-appclean.list  🍃 应用净化           1008 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
 04-proxy.list  🚀 节点选择              1 条  <- custom-proxy.list (本地)
-05-meta.list  📘 Meta            556 条  <- meta.list (本地)
+05-meta.list  📘 Meta            557 条  <- meta.list (本地)
 06-auto.list  ♻️ 自动选择             6 条  <- custom-auto.list (本地)
 07-saver.list  📺 省流节点              1 条  <- custom-saver.list (本地)
 08-fcm.list  📢 谷歌FCM            44 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
@@ -19,16 +19,16 @@
 11-disney.list  🎥 DisneyP          20 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DisneyPlus.list
 12-youtube.list  🎥 YouTube          14 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
 13-bilibili.list  📺 哔哩海外             21 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list
-14-ai.list  🤖 人工智能            106 条  <- custom-ai.list (本地)
+14-ai.list  🤖 人工智能            107 条  <- custom-ai.list (本地)
 15-microsoft.list  Ⓜ️ 微软服务            79 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
 16-apple.list  🍎 苹果服务             28 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
 17-telegram.list  📲 电报消息             13 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
 18-game.list  🎮 外服游戏            545 条  <- https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game.list
 19-bahamut.list  📺 巴哈姆特              5 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list
-20-proxymedia.list  🌍 国外媒体            253 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+20-proxymedia.list  🌍 国外媒体            252 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
 21-chinamedia.list  🌏 国内媒体             33 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list
 22-netease.list  🎶 网易音乐             37 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list
-23-proxy-2.list  🚀 节点选择            343 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
+23-proxy-2.list  🚀 节点选择            344 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
 24-direct-3.list  🎯 全球直连            607 条  <- https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list; ChinaIpV6.list (按 --with-china-domain 跳过); https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list; ChinaIp.list (按 --with-china-domain 跳过); 内置 GEOIP,CN
 25-final.list  🐟 漏网之鱼              1 条  <- 内置 FINAL
 

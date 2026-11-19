@@ -1,6 +1,6 @@
 # 策略：🌍 国外媒体
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
-# 条数：253（去重后；不支持的类型已丢弃：{'url-regex (需 MITM，已分离到 QX-mitm-optional.list)': 1, 'PROCESS-NAME': 3, '跨策略重复(前面已命中)': 115}）
+# 条数：252（去重后；不支持的类型已丢弃：{'url-regex (需 MITM，已分离到 QX-mitm-optional.list)': 1, 'PROCESS-NAME': 3, '跨策略重复(前面已命中)': 116}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,edgedatg.com,🌍 国外媒体
@@ -21,7 +21,6 @@ host,notebooklm.google.com,🌍 国外媒体
 host,sydney.bing.com,🌍 国外媒体
 host-suffix,ai.azure.com,🌍 国外媒体
 host-suffix,auth0.com,🌍 国外媒体
-host-suffix,claude.com,🌍 国外媒体
 host-suffix,client-api.arkoselabs.com,🌍 国外媒体
 host-suffix,events.statsigapi.net,🌍 国外媒体
 host-suffix,featuregates.org,🌍 国外媒体

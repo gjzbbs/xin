@@ -1,6 +1,6 @@
 # 策略：🚀 节点选择
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
-# 条数：343（去重后；不支持的类型已丢弃：{'跨策略重复(前面已命中)': 87}）
+# 条数：344（去重后；不支持的类型已丢弃：{'跨策略重复(前面已命中)': 86}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,1password.com,🚀 节点选择
@@ -14,6 +14,7 @@ host-suffix,inoreader.com,🚀 节点选择
 host-suffix,ip138.com,🚀 节点选择
 host-suffix,linkedin.com,🚀 节点选择
 host-suffix,myteamspeak.com,🚀 节点选择
+host-suffix,notion.so,🚀 节点选择
 host-suffix,ping.pe,🚀 节点选择
 host-suffix,reddit.com,🚀 节点选择
 host-suffix,teddysun.com,🚀 节点选择

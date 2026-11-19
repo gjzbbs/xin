@@ -1,5 +1,5 @@
 # gjzbbs/xin 全量分流（ShellClash_Custom.ini 的 QuantumultX 版）
-# 4905 条规则，文件内顺序 = 匹配优先级（等于 ini 里 ruleset 的先后）
+# 4907 条规则，文件内顺序 = 匹配优先级（等于 ini 里 ruleset 的先后）
 # 直接加到 QX「设置 → 资源 → 分流」，策略名必须与配置里 [policy] 段一致
 
 host-suffix,acl4.ssr,🎯 全球直连
@@ -2147,6 +2147,7 @@ host-suffix,midentsolutions.com,📘 Meta
 host-suffix,mobilefacebook.com,📘 Meta
 host-suffix,moneywithfacebook.com,📘 Meta
 host-suffix,muse.ai,📘 Meta
+host-suffix,museai.com,📘 Meta
 host-suffix,myfbfans.com,📘 Meta
 host-suffix,nbabot.net,📘 Meta
 host-suffix,newsfeed.com,📘 Meta
@@ -2912,7 +2913,6 @@ host-suffix,anyscale.com,🤖 人工智能
 host-suffix,deepinfra.com,🤖 人工智能
 host-suffix,novita.ai,🤖 人工智能
 host-suffix,siliconflow.com,🤖 人工智能
-host-suffix,siliconflow.cn,🤖 人工智能
 host-suffix,poe.com,🤖 人工智能
 host-suffix,character.ai,🤖 人工智能
 host-suffix,pi.ai,🤖 人工智能
@@ -2928,8 +2928,6 @@ host-suffix,tabnine.com,🤖 人工智能
 host-suffix,sourcegraph.com,🤖 人工智能
 host-suffix,continue.dev,🤖 人工智能
 host-suffix,replit.com,🤖 人工智能
-host-suffix,notion.so,🤖 人工智能
-host-suffix,notion.site,🤖 人工智能
 host-suffix,scale.com,🤖 人工智能
 host-suffix,weights.gg,🤖 人工智能
 host-suffix,langchain.com,🤖 人工智能
@@ -2943,9 +2941,6 @@ host-suffix,proactivebackend-pa.googleapis.com,🤖 人工智能
 host,alkalicore-pa.clients6.google.com,🤖 人工智能
 host,alkalimakersuite-pa.clients6.google.com,🤖 人工智能
 host,webchannel-alkalimakersuite-pa.clients6.google.com,🤖 人工智能
-host,accounts.google.com,🤖 人工智能
-host,apis.google.com,🤖 人工智能
-host,www.google.com,🤖 人工智能
 host,signaler-pa.clients6.google.com,🤖 人工智能
 host-keyword,gemini,🤖 人工智能
 host-keyword,generativelanguage,🤖 人工智能
@@ -2956,13 +2951,20 @@ host-suffix,b.ai,🤖 人工智能
 host-suffix,gorouter.app,🤖 人工智能
 host-suffix,agentrouter.org,🤖 人工智能
 host-suffix,manus.im,🤖 人工智能
-host-suffix,metamask.com,🤖 人工智能
-host-suffix,museai.com,🤖 人工智能
 host-suffix,ecto1.ai,🤖 人工智能
-host-suffix,accountscenter.com,🤖 人工智能
-host,fb.okta.com,🤖 人工智能
 host-suffix,tabbit.ai,🤖 人工智能
 host-suffix,lightvela.ai,🤖 人工智能
+host-suffix,claude.com,🤖 人工智能
+host-suffix,notebooklm.google.com,🤖 人工智能
+host-suffix,labs.google,🤖 人工智能
+host-suffix,v0.dev,🤖 人工智能
+host-suffix,v0.app,🤖 人工智能
+host-suffix,bolt.new,🤖 人工智能
+host-suffix,lovable.dev,🤖 人工智能
+host-suffix,civitai.com,🤖 人工智能
+host-suffix,openart.ai,🤖 人工智能
+host-suffix,krea.ai,🤖 人工智能
+host-suffix,openai.azure.com,🤖 人工智能
 host-keyword,1drv,Ⓜ️ 微软服务
 host-keyword,microsoft,Ⓜ️ 微软服务
 host-suffix,aadrm.com,Ⓜ️ 微软服务
@@ -3651,7 +3653,6 @@ host,notebooklm.google.com,🌍 国外媒体
 host,sydney.bing.com,🌍 国外媒体
 host-suffix,ai.azure.com,🌍 国外媒体
 host-suffix,auth0.com,🌍 国外媒体
-host-suffix,claude.com,🌍 国外媒体
 host-suffix,client-api.arkoselabs.com,🌍 国外媒体
 host-suffix,events.statsigapi.net,🌍 国外媒体
 host-suffix,featuregates.org,🌍 国外媒体
@@ -3967,6 +3968,7 @@ host-suffix,inoreader.com,🚀 节点选择
 host-suffix,ip138.com,🚀 节点选择
 host-suffix,linkedin.com,🚀 节点选择
 host-suffix,myteamspeak.com,🚀 节点选择
+host-suffix,notion.so,🚀 节点选择
 host-suffix,ping.pe,🚀 节点选择
 host-suffix,reddit.com,🚀 节点选择
 host-suffix,teddysun.com,🚀 节点选择

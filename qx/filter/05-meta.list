@@ -1,6 +1,6 @@
 # 策略：📘 Meta
 # 来源：meta.list (本地)
-# 条数：556（去重后；不支持的类型已丢弃：无）
+# 条数：557（去重后；不支持的类型已丢弃：无）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,aboutfacebook.com,📘 Meta
@@ -482,6 +482,7 @@ host-suffix,midentsolutions.com,📘 Meta
 host-suffix,mobilefacebook.com,📘 Meta
 host-suffix,moneywithfacebook.com,📘 Meta
 host-suffix,muse.ai,📘 Meta
+host-suffix,museai.com,📘 Meta
 host-suffix,myfbfans.com,📘 Meta
 host-suffix,nbabot.net,📘 Meta
 host-suffix,newsfeed.com,📘 Meta

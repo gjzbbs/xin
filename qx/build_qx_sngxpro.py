@@ -36,7 +36,6 @@ MAP = {
     "🎥 DisneyP": "网飞影视",
     "🎥 YouTube": "国际媒体",
     "📺 哔哩海外": "港台番剧",
-    "🤖 人工智能": "全球加速",
     "Ⓜ️ 微软服务": "Bing",
     "🍎 苹果服务": "苹果服务",
     "📲 电报消息": "电报代理",
@@ -46,23 +45,37 @@ MAP = {
     "🌏 国内媒体": "direct",
     "🎶 网易音乐": "direct",
     "🐟 漏网之鱼": "黑白名单",
-    # 📘 Meta 由 --meta-group 决定
+    # 📘 Meta 由 --meta-group 决定，🤖 人工智能 由 --ai-group 决定
 }
 
 # 用户配置里真实存在的策略（含 QX 内置 direct/reject/proxy）
+# 单域名强制归组：museai.com 是 muse.ai 的同一家，
+# 母版把它放在 custom-ai.list 里会落到 AI 组，但用户要的是 muse → Meta。
+SPECIAL = {
+    "museai.com": "Meta",
+}
+
 HIS = {
     "Bing", "延迟最低", "TikTok", "新加坡", "美国", "日本", "韩国", "香港", "台湾",
     "特殊", "IPLC", "苹果服务", "全球加速", "港台番剧", "国际媒体", "声田音乐",
-    "网飞影视", "电报代理", "黑白名单", "Meta", "direct", "reject", "proxy",
+    "网飞影视", "电报代理", "黑白名单", "Meta", "AI", "direct", "reject", "proxy",
 }
 
 
-def map_line(line, meta_group):
+def map_line(line, meta_group, ai_group):
     p = [x.strip() for x in line.split(",")]
     if p[0].upper() == "FINAL":
         p[1] = MAP.get(p[1], p[1])
     else:
-        p[2] = meta_group if p[2] == "📘 Meta" else MAP.get(p[2], p[2])
+        val = p[1].lower()
+        if val in SPECIAL:
+            p[2] = SPECIAL[val]
+        elif p[2] == "📘 Meta":
+            p[2] = meta_group
+        elif p[2] == "🤖 人工智能":
+            p[2] = ai_group
+        else:
+            p[2] = MAP.get(p[2], p[2])
     return ",".join(p), p[-1] if p[0].upper() == "FINAL" else p[2]
 
 
@@ -70,10 +83,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--meta-group", default="全球加速",
                     help="📘 Meta 那套规则落到你现有的哪个组（默认 全球加速）")
+    ap.add_argument("--ai-group", default="全球加速",
+                    help="🤖 人工智能 那套规则落到哪个组（默认 全球加速；建了 AI 组就传 AI）")
     args = ap.parse_args()
     mg = args.meta_group
-    if mg not in HIS:
-        print("警告：%r 不在你现有配置的策略里，规则会被 QX 忽略。" % mg)
+    ag = args.ai_group
+    for name in (mg, ag):
+        if name not in HIS and name not in MAP.values():
+            print("警告：%r 不在你现有配置的策略里，规则会被 QX 忽略。" % name)
         print("      现有可用：%s" % "、".join(sorted(HIS - {"direct", "reject", "proxy"})))
 
     rows = [l.strip() for l in open(SRC, encoding="utf-8")
@@ -84,7 +101,7 @@ def main():
     # ---- 全套
     out, bad = [], set()
     for r in rows:
-        line, pol = map_line(r, mg)
+        line, pol = map_line(r, mg, ag)
         out.append(line)
         if pol not in HIS:
             bad.add(pol)
@@ -95,7 +112,12 @@ def main():
         "#       geoip, cn, direct 与 final, 黑白名单 两条删掉（本文件已含）",
         "",
     ]
-    suffix = "" if mg == "全球加速" else "-" + mg
+    parts = []
+    if mg != "全球加速":
+        parts.append(mg)
+    if ag != "全球加速":
+        parts.append(ag)
+    suffix = "-" + "-".join(parts) if parts else ""
     open(os.path.join(HERE, "QX-sngxpro-all%s.list" % suffix), "w", encoding="utf-8", newline="\n").write(
         "\n".join(hdr + out) + "\n")
 
@@ -116,8 +138,26 @@ def main():
     open(os.path.join(HERE, "QX-sngxpro-meta%s.list" % suffix), "w", encoding="utf-8", newline="\n").write(
         "\n".join(mhdr + meta) + "\n")
 
+    ai = []
+    for r in rows:
+        p = [x.strip() for x in r.split(",")]
+        if len(p) >= 3 and (p[2] == "🤖 人工智能" or p[1].lower() in SPECIAL):
+            if p[1].lower() in SPECIAL:
+                continue
+            p[2] = ag
+            ai.append(",".join(p))
+    ahdr = [
+        "# gjzbbs/xin · AI / 人工智能 系（OpenAI / Claude / Gemini / Grok / 本地推理工具 等）",
+        "# %d 条，策略统一为 %s" % (len(ai), ag),
+        "# 用法：加到 QX「设置 → 资源 → 分流」，并拖到主分流资源之前（否则主资源里的同名域名先命中）",
+        "",
+    ]
+    open(os.path.join(HERE, "QX-sngxpro-ai%s.list" % suffix), "w", encoding="utf-8", newline="\n").write(
+        "\n".join(ahdr + ai) + "\n")
+
     print("全部 %d 条 → qx/QX-sngxpro-all%s.list" % (len(out), suffix))
     print("Meta  %d 条 → qx/QX-sngxpro-meta%s.list（策略=%s）" % (len(meta), suffix, mg))
+    print("AI    %d 条 → qx/QX-sngxpro-ai%s.list（策略=%s）" % (len(ai), suffix, ag))
     if bad:
         print("未映射到现有策略的名字：%s" % "、".join(sorted(bad)))
         return 1
