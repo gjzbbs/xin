@@ -348,3 +348,36 @@ python qx/build_qx.py --with-final   # 自包含模式：把 final 也写进资�
 ```
 
 `qx/validate_qx.py` 对「远程资源无 FINAL」只给提示不给错误，这是预期行为。
+
+---
+
+## 十三、IPv6：路由器和 QX 表现不同的头号原因
+
+同一套规则，路由器上的 ShellCrash 正常、QX 上同一个服务报「在此国家/地区无法使用」，
+先查 IPv6，而不是查规则。
+
+原因：QX 的 `[dns]` 段**默认是禁用 IPv6 的**（官方示例首行就是 `no-ipv6`），
+但很多第三方配置模板（含「少年歌行PRO」小白配置）把这一行删掉了。没有 `no-ipv6` 时：
+
+- QX 会正常解析 AAAA 记录，`gemini.google.com` / `chatgpt.com` 优先走 IPv6；
+- 节点（vless/hysteria2）多数只保证 IPv4 出站，IPv6 要么打不通、要么从别处出去；
+- 服务端看到的来源变成不支持地区的 IP → 判定地区不可用；
+- 而路由器上的 ShellCrash 因为上游没有 IPv6，天然只走 IPv4，所以一切正常。
+
+修法（配置 `[dns]` 段）：
+
+```
+[dns]
+no-ipv6
+server=223.5.5.5
+...
+```
+
+加上之后 AAAA 查询直接失败，全部回落 IPv4，行为与 ShellCrash 一致。
+
+判断是否已经泄漏 IPv6：手机浏览器开 <https://test-ipv6.com/index.html.zh_CN>，
+如果显示的 IPv6 是你家宽带的地址而不是节点地址，就是泄漏。
+
+要保留国内服务走 IPv6 又不让境外服务走 IPv6，QX 做不到按域名区分，
+只能在 `[filter_local]` 用 `ip6-cidr, ::/0, direct` 让 IPv6 全直连 ——
+那样境外站点仍会从家宽 IPv6 出去，问题更严重。所以就是 `no-ipv6`。
