@@ -1,5 +1,5 @@
 # gjzbbs/xin 全量分流 · 少年歌行PRO 组名版
-# 4907 条，文件内顺序 = 匹配优先级；末尾自带 geoip,cn,direct 与 final,黑白名单
+# 4906 条，文件内顺序 = 匹配优先级；末尾自带 geoip,cn,direct 与 final,黑白名单
 # 用法：加到 QX「设置 → 资源 → 分流」，并把配置文件 [filter_local] 里的
 #       geoip, cn, direct 与 final, 黑白名单 两条删掉（本文件已含）
 
@@ -4909,4 +4909,3 @@ host-suffix,95516.com,direct
 host-suffix,smtp,direct
 host-keyword,aria2,direct
 geoip,cn,direct
-final,黑白名单

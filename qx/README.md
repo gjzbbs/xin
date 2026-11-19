@@ -321,3 +321,30 @@ python qx/build_qx_sngxpro.py --meta-group Meta --ai-group AI   # 生成全量�
 - 广告拦截那 1600 多条全是 `host-suffix` / `host-keyword`，**不需要 MITM** 也能拦。
 
 ---
+
+---
+
+## 十二、`final` 必须写在配置文件里，不能放远程资源（踩过）
+
+QX 在**配置校验阶段**就要求存在 final 规则，找不到就弹
+`错误 / 分流规则 Final 丢失`，整份配置无法启用 —— 此时点任何页面都只弹这一个框。
+
+关键：**远程分流资源里的 `final` 不参与这项校验**，写在资源末尾等于没写。
+
+正确分工：
+
+| 位置 | 内容 |
+|---|---|
+| 配置 `[filter_local]` | `final, 黑白名单` ← **必须在这里** |
+| 远程分流资源 | 4906 条规则，末尾是 `geoip,cn,direct`，**不带 final** |
+
+不会互相截断，因为 `final` 的语义是「所有规则都不匹配时才用」，永远排在最后。
+
+生成器默认不输出 final（`--with-final` 可强行输出，仅用于把规则全部本地化的场景）：
+
+```bash
+python qx/build_qx.py            # 默认：不写 final，末尾只有 geoip,cn
+python qx/build_qx.py --with-final   # 自包含模式：把 final 也写进资源
+```
+
+`qx/validate_qx.py` 对「远程资源无 FINAL」只给提示不给错误，这是预期行为。

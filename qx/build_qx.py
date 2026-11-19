@@ -347,6 +347,7 @@ def main():
     ap.add_argument("--remote", action="store_true", help="自维护 list 也走网络")
     ap.add_argument("--servers", default=os.path.join(HERE, "servers.txt"))
     ap.add_argument("--no-cn-suffix", action="store_true", help="不额外加 DOMAIN-SUFFIX,cn 兜底")
+    ap.add_argument("--with-final", action="store_true", help="把 final 写进远程资源（默认不写，QX 要求 [filter_local] 里有 final）")
     ap.add_argument("--with-mitm-rules", action="store_true", help="把 url-regex / user-agent 也放进主资源（需先配 [mitm] hostname，否则 QX 报 Invalid Line）")
     ap.add_argument("--force-policy", default=None,
                     help='把所有规则的策略名统一改成这一个（用于你 QX 里已有自己的策略组，如 --force-policy "Proxy"）')
@@ -360,6 +361,7 @@ def main():
     segs = build_segments(rulesets)
     FP = args.force_policy
     failed = []
+    skipped_segments = []
     used, manifest, report = set(), [], []
     total_rules = 0
     skipped_all = {}
@@ -381,8 +383,14 @@ def main():
                     srcs.append("内置 GEOIP,CN")
                     continue
                 if key == "final":
-                    lines.append("final,%s" % (FP or policy))
-                    srcs.append("内置 FINAL")
+                    # QX 硬性要求：final 必须写在配置文件 [filter_local] 里，
+                    # 远程分流资源里的 final 不参与「分流规则 Final 丢失」这项校验。
+                    # 默认不输出；--with-final 可强行输出（纯本地化/自包含场景）。
+                    if args.with_final:
+                        lines.append("final,%s" % (FP or policy))
+                        srcs.append("内置 FINAL")
+                    else:
+                        srcs.append("内置 FINAL（已跳过：final 必须写在配置 [filter_local]）")
                     continue
                 continue
             if (not args.with_china_domain) and any(s in spec for s in SKIP_UNLESS_FULL):
@@ -410,6 +418,11 @@ def main():
             elif parts[0] not in ("final",):
                 dropped["跨策略重复(前面已命中)"] = dropped.get("跨策略重复(前面已命中)", 0) + 1
         lines = uniq
+
+        if not lines:
+            # 空段不生成文件（例如 final 已移到配置文件，这一段自然为空）
+            skipped_segments.append(fname)
+            continue
 
         header = [
             "# 策略：%s" % policy,

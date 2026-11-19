@@ -133,7 +133,8 @@ def main():
             else:
                 last_regular = max(last_regular, i)
     if final_idx < 0:
-        errs.append("整个配置没有 FINAL 规则")
+        # QX 要求 final 写在配置 [filter_local]，远程资源里不带 final 是正确做法
+        warns.append("远程资源里没有 FINAL（正常：final 应写在配置 [filter_local]）")
     if geoip_idx < 0:
         warns.append("没有 GEOIP,CN（国内 IP 会走漏网之鱼，境外流量会多绕一跳）")
     if last_regular > geoip_idx >= 0:
@@ -155,10 +156,8 @@ def main():
     if os.path.exists(allp):
         rows = [l.strip() for l in open(allp, encoding="utf-8")
                 if l.strip() and not l.startswith("#")]
-        if rows[-1].upper().startswith("FINAL,") is False:
-            errs.append("QX-all.list 最后一行不是 FINAL")
         if not any(r.upper().startswith("FINAL,") for r in rows):
-            errs.append("QX-all.list 缺 FINAL")
+            warns.append("QX-all.list 不带 FINAL（正常：final 应写在配置 [filter_local]）")
         gi = next((i for i, r in enumerate(rows) if r.upper().startswith("GEOIP,")), -1)
         fi = next((i for i, r in enumerate(rows) if r.upper().startswith("FINAL,")), -1)
         if gi < 0:
