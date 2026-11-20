@@ -18,5 +18,20 @@
 # 原规则是 DOMAIN-KEYWORD,rewards,DIRECT；这里走「🎯 全球直连」（该组默认即 DIRECT）
 DOMAIN-KEYWORD,rewards
 
+# ---- Cloudflare：控制台/文档/前端库走直连 ----
+# 为什么不全放直连：challenges.cloudflare.com（Turnstile 人机验证）必须和
+# 被访问页面用同一个出口，否则部分站点会验证循环，所以它保持走代理，
+# 这里只挑「本身不参与页面验证」的入口。
+# cloudflare-dns.com / one.one.one.one（1.1.1.1 的 DoH/DoT）国内不通，也必须走代理，
+# 不在本清单里。
+DOMAIN,cloudflare.com
+DOMAIN,www.cloudflare.com
+DOMAIN,dash.cloudflare.com
+DOMAIN,api.cloudflare.com
+DOMAIN,developers.cloudflare.com
+DOMAIN,support.cloudflare.com
+DOMAIN-SUFFIX,cdnjs.cloudflare.com
+DOMAIN-SUFFIX,cloudflareinsights.com
+
 # ---- 示例，按需删改 ----
 DOMAIN-SUFFIX,example.com

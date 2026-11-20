@@ -1,6 +1,6 @@
 # 策略：🎯 全球直连
 # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list; https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list; custom-direct.list (本地)
-# 条数：69（去重后；不支持的类型已丢弃：{'回环/内网 IPv6': 1}）
+# 条数：77（去重后；不支持的类型已丢弃：{'回环/内网 IPv6': 1}）
 # 由 qx/build_qx.py 生成，勿手改（改 ShellClash_Custom.ini 或对应 .list 后重跑）
 
 host-suffix,acl4.ssr,🎯 全球直连
@@ -71,4 +71,12 @@ host-suffix,familyds.com,🎯 全球直连
 host-suffix,familyds.net,🎯 全球直连
 host-suffix,familyds.org,🎯 全球直连
 host-keyword,rewards,🎯 全球直连
+host,cloudflare.com,🎯 全球直连
+host,www.cloudflare.com,🎯 全球直连
+host,dash.cloudflare.com,🎯 全球直连
+host,api.cloudflare.com,🎯 全球直连
+host,developers.cloudflare.com,🎯 全球直连
+host,support.cloudflare.com,🎯 全球直连
+host-suffix,cdnjs.cloudflare.com,🎯 全球直连
+host-suffix,cloudflareinsights.com,🎯 全球直连
 host-suffix,example.com,🎯 全球直连

@@ -1,5 +1,5 @@
 # gjzbbs/xin 全量分流 · 少年歌行PRO 组名版
-# 4911 条，文件内顺序 = 匹配优先级；末尾自带 geoip,cn,direct 与 final,黑白名单
+# 4919 条，文件内顺序 = 匹配优先级；末尾自带 geoip,cn,direct 与 final,黑白名单
 # 用法：加到 QX「设置 → 资源 → 分流」，并把配置文件 [filter_local] 里的
 #       geoip, cn, direct 与 final, 黑白名单 两条删掉（本文件已含）
 
@@ -71,6 +71,14 @@ host-suffix,familyds.com,direct
 host-suffix,familyds.net,direct
 host-suffix,familyds.org,direct
 host-keyword,rewards,direct
+host,cloudflare.com,direct
+host,www.cloudflare.com,direct
+host,dash.cloudflare.com,direct
+host,api.cloudflare.com,direct
+host,developers.cloudflare.com,direct
+host,support.cloudflare.com,direct
+host-suffix,cdnjs.cloudflare.com,direct
+host-suffix,cloudflareinsights.com,direct
 host-suffix,example.com,direct
 host-keyword,admarvel,reject
 host-keyword,admaster,reject
