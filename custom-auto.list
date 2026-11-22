@@ -13,7 +13,11 @@
 
 # ---- 从路由器 rules.yaml 迁移（2026-11-05 同步）----
 DOMAIN-SUFFIX,namecheap.com
-DOMAIN-SUFFIX,cloudflare.com
+# challenges.cloudflare.com = Turnstile 人机验证，必须和「被访问的网站」同一个出口，
+# 否则不少站点会验证循环。它单独留在这里走代理，不要写成 cloudflare.com 整域兜底——
+# 整域兜底会把 dash/api/developers 等控制台域名也拖进代理（而且会抢在
+# custom-direct.list 的精确规则之后、把没被覆盖的子域全推去代理）。
+DOMAIN-SUFFIX,challenges.cloudflare.com
 DOMAIN-SUFFIX,trycloudflare.com
 DOMAIN-SUFFIX,ascsonoway.com
 DOMAIN-SUFFIX,atomgit.com
