@@ -109,6 +109,32 @@ Clash 规则是**从上往下第一条命中即停**。自维护的清单要放�
 放在后面时，`facebook.com` 会先被 ProxyLite 匹配走（落到 🚀 节点选择），
 `📘 Meta` 组永远是 0 条规则——**格式全对也没用，就是位置问题**。
 
+### Cloudflare 怎么分流（2026-11-22 实测结论）
+
+结论：**Cloudflare 自己的域名一律直连，不做整域走代理。**
+
+- 直连白名单在 `custom-direct.list`，共 8 条，落到 `🎯 全球直连`（该组默认即 DIRECT）：
+  `DOMAIN,cloudflare.com`、`www`、`dash`、`api`、`developers`、`support`、
+  `DOMAIN-SUFFIX,cdnjs.cloudflare.com`、`DOMAIN-SUFFIX,cloudflareinsights.com`。
+- 例外只有一条：`DOMAIN-SUFFIX,challenges.cloudflare.com`（Turnstile 人机验证）留在
+  `custom-auto.list` 里走代理。它必须和「被访问的页面」同出口，否则不少站点会验证循环。
+
+**为什么不做 `DOMAIN-SUFFIX,cloudflare.com` 整域兜底**：整域后缀会连
+`challenges.cloudflare.com` 一起抓走，让后面那条针对验证域的精确规则变成死规则；
+同时把没被白名单覆盖的其余子域全部推去代理，而这些子域基本都是官方服务，走代理没有收益。
+
+**直连实测（爱快本机出口 = 国内宽带直连，出口 `182.246.156.149` / `loc=CN` / `colo=LAX`）**：
+
+| 目标 | 结果 | 耗时 |
+|---|---|---|
+| `https://www.cloudflare.com` | 200 | 4.61s |
+| `https://dash.cloudflare.com` | 403（未带鉴权，正常） | 1.03s |
+| `https://api.cloudflare.com/client/v4/user/tokens/verify` | 400（缺 token，正常） | 1.13s |
+| `https://challenges.cloudflare.com/turnstile/v0/api.js` | 302（正常跳转） | 6.87s |
+
+`cloudflare-dns.com` / `one.one.one.one`（1.1.1.1 的 DoH/DoT）国内不通，
+**不在**直连白名单里，仍然走代理。
+
 ---
 
 ## 四、优先级顺序（从上往下，先命中先生效）
